@@ -31,5 +31,11 @@ namespace CourseP3.Models
         }
 
         public System.Data.Entity.DbSet<CourseP3.Areas.Admin.Models.FAQ> FAQs { get; set; }
+
+        public System.Data.Entity.DbSet<CourseP3.Areas.Admin.Models.CenterDetail> CenterDetails { get; set; }
+
+        public System.Data.Entity.DbSet<CourseP3.Areas.Admin.Models.Category> Categories { get; set; }
+
+        public System.Data.Entity.DbSet<CourseP3.Areas.Admin.Models.Course> Courses { get; set; }
     }
 }
