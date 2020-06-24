@@ -29,5 +29,7 @@ namespace CourseP3.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<CourseP3.Areas.Admin.Models.FAQ> FAQs { get; set; }
     }
 }
