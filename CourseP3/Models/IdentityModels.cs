@@ -1,6 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using CourseP3.Areas.Admin.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -30,12 +31,10 @@ namespace CourseP3.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<CourseP3.Areas.Admin.Models.FAQ> FAQs { get; set; }
+        public System.Data.Entity.DbSet<FAQ> FAQs { get; set; }
 
-        public System.Data.Entity.DbSet<CourseP3.Areas.Admin.Models.CenterDetail> CenterDetails { get; set; }
-
-        public System.Data.Entity.DbSet<CourseP3.Areas.Admin.Models.Category> Categories { get; set; }
-
-        public System.Data.Entity.DbSet<CourseP3.Areas.Admin.Models.Course> Courses { get; set; }
+        public System.Data.Entity.DbSet<CenterDetail> CenterDetails { get; set; }
+    
+        public System.Data.Entity.DbSet<Course> Courses { get; set; }
     }
 }
