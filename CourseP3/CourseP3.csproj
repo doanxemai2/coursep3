@@ -168,9 +168,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CenterDetailsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CoursesController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\FAQsController.cs" />
+    <Compile Include="Areas\Admin\Models\CategoryCourse.cs" />
     <Compile Include="Areas\Admin\Models\CenterDetail.cs" />
+    <Compile Include="Areas\Admin\Models\Course.cs" />
     <Compile Include="Areas\Admin\Models\FAQ.cs" />
     <Compile Include="Areas\Client\ClientAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -182,11 +187,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202006241524590_InitialCreate.cs" />
-    <Compile Include="Migrations\202006241524590_InitialCreate.Designer.cs">
-      <DependentUpon>202006241524590_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -580,6 +580,21 @@
     <Content Include="Areas\Admin\Views\FAQs\Details.cshtml" />
     <Content Include="Areas\Admin\Views\FAQs\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\FAQs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CenterDetails\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\CenterDetails\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\CenterDetails\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\CenterDetails\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\CenterDetails\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -667,11 +682,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202006241524590_InitialCreate.resx">
-      <DependentUpon>202006241524590_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
