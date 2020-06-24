@@ -1,3 +1,7 @@
+using CourseP3.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+
 namespace CourseP3.Migrations
 {
     using System;
@@ -14,10 +18,41 @@ namespace CourseP3.Migrations
 
         protected override void Seed(CourseP3.Models.ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            var userManager = new UserManager<ApplicationUser>(
+                new UserStore<ApplicationUser>(context));
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            if (!roleManager.RoleExists("Admin"))
+            {
+                var role = new IdentityRole("Admin");
+                roleManager.Create(role);
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
+            }
+            if (!roleManager.RoleExists("User"))
+            {
+                var role = new IdentityRole("User");
+                roleManager.Create(role);
+
+            }
+            if (!context.Users.Any(u => u.UserName == "admin"))
+            {
+                var user = new ApplicationUser
+                {
+                    UserName = "admin",
+                    Email = "admin@gmail.com"
+                };
+                userManager.Create(user, "password");
+                userManager.AddToRole(user.Id, "Admin");
+            }
+            if (!context.Users.Any(u => u.UserName == "user"))
+            {
+                var user = new ApplicationUser
+                {
+                    UserName = "user",
+                    Email = "user@gmail.com"
+                };
+                userManager.Create(user, "password");
+                userManager.AddToRole(user.Id, "User");
+            }
         }
     }
 }
