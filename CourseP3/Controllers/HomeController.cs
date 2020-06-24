@@ -13,7 +13,14 @@ namespace CourseP3.Controllers
         {
             return View();
         }
-
+        public ActionResult About()
+        {
+            return View();
+        }
+        public ActionResult Contact()
+        {
+            return View();
+        }
         // GET: Home/Details/5
         public ActionResult Details(int id)
         {
