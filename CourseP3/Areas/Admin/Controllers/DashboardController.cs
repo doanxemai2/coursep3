@@ -9,9 +9,9 @@ namespace CourseP3.Areas.Admin.Controllers
     public class DashboardController : Controller
     {
         // GET: Admin/Home
-        public ActionResult Index()
+        public ActionResult Dashboard()
         {
-            return View("Dashboard");
+            return View();
         }
         public ActionResult Chart()
         {
