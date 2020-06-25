@@ -3,16 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CourseP3.Models;
 
 namespace CourseP3.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Home
         public ActionResult Index()
         {
+            ViewBag.Courses = db.Courses.ToList();
             return View();
         }
+
+        [ChildActionOnly]
+        public ActionResult NavBar()
+        {
+            return PartialView("~/Views/Shared/_Navbar.cshtml", db.CenterDetails.ToList().FirstOrDefault());
+        }
+
         public ActionResult About()
         {
             return View();
@@ -20,6 +30,10 @@ namespace CourseP3.Controllers
         public ActionResult Contact()
         {
             return View();
+        }
+        public ActionResult FAQ()
+        {
+            return View(db.FAQs.ToList());
         }
         // GET: Home/Details/5
         public ActionResult Details(int id)
