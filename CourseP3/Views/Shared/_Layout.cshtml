@@ -51,8 +51,9 @@
                 <div class="row align-items-center">
                     <div class="col-lg-9 d-none d-lg-block">
                         <a href="#" class="small mr-3"><span class="icon-question-circle-o mr-2"></span> Have a questions?</a>
-                        <a href="#" class="small mr-3"><span class="icon-phone2 mr-2"></span> 10 20 123 456</a>
-                        <a href="#" class="small mr-3"><span class="icon-envelope-o mr-2"></span> info@mydomain.com</a>
+                        @Html.Action("NavBar", "Home")
+                        @*<a href="#" class="small mr-3"><span class="icon-phone2 mr-2"></span> @ViewBag.Cen</a>
+        <a href="#" class="small mr-3"><span class="icon-envelope-o mr-2"></span> info@mydomain.com</a>*@
                     </div>
                     <div class="col-lg-3 text-right">
                         @if (Request.IsAuthenticated)
@@ -101,6 +102,9 @@
                                 </li>
                                 <li>
                                     <a href="/Home/Contact" class="nav-link text-left">Contact</a>
+                                </li>
+                                <li>
+                                    <a href="/Home/FAQ" class="nav-link text-left">FAQ</a>
                                 </li>
                             </ul>                                                                                                                                                                                                                                                                                          </ul>
                         </nav>
