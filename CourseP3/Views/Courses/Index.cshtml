@@ -32,7 +32,7 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="course-1-item">
                         <figure class="thumnail">
-                            <a href="/Courses/Detail"><img src="@item.Image" alt="Image" class="img-fluid"></a>
+                            <a href="/Courses/Detail/@item.Id"><img src="@item.Image" alt="Image" class="img-fluid"></a>
                             <div class="price">$@item.Price</div>
                             <div class="category">
                                 <h3>@item.Name</h3>
@@ -48,7 +48,7 @@
                                 <span class="icon-star2 text-warning"></span>
                             </div>
                             <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                            <p><a href="/Courses/Detail" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
+                            <p><a href="/Courses/Detail/@item.Id" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
                         </div>
                     </div>
                 </div>
