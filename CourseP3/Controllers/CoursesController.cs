@@ -18,7 +18,7 @@ namespace CourseP3.Controllers
             return View(db.Courses.ToList());
         }
 
-        public ActionResult Details(int? id)
+        public ActionResult Detail(int? id)
         {
             if (id == null)
             {
