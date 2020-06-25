@@ -28,6 +28,7 @@
 
     <link rel="stylesheet" href="~/Content/css/style.css">
 
+    <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome/css/font-awesome.min.css" />
 
 
 </head>
@@ -206,6 +207,20 @@
     <script src="~/Scripts/js/jquery.mb.YTPlayer.min.js"></script>
     <script src="~/Scripts/js/main.js"></script>
     @RenderSection("scripts", false)
+    <script>
+        $(document).on('click', '.panel-heading span.clickable', function (e) {
+            var $this = $(this);
+            if (!$this.hasClass('panel-collapsed')) {
+                $this.parents('.panel').find('.panel-body').slideUp();
+                $this.addClass('panel-collapsed');
+                $this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+            } else {
+                $this.parents('.panel').find('.panel-body').slideDown();
+                $this.removeClass('panel-collapsed');
+                $this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+            }
+        })
+    </script>
 </body>
 
 </html>
