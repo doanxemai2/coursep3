@@ -11,17 +11,17 @@ namespace CourseP3.Areas.Admin.Controllers
         // GET: Admin/Home
         public ActionResult Index()
         {
-            return View();
-        }public ActionResult Dashboard()
+            return View("Dashboard");
+        }
+        public ActionResult Chart()
         {
             return View();
-        }public ActionResult Chart()
+        }
+        public ActionResult Table()
         {
             return View();
-        }public ActionResult Table()
-        {
-            return View();
-        }public ActionResult Form()
+        }
+        public ActionResult Form()
         {
             return View();
         }
