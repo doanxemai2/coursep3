@@ -68,6 +68,10 @@ namespace CourseP3.Controllers
         {
             return View();
         }
+        public ActionResult News()
+        {
+            return View();
+        }
 
         // POST: Home/Edit/5
         [HttpPost]
