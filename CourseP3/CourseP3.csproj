@@ -191,9 +191,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202006261508451_tsts.cs" />
-    <Compile Include="Migrations\202006261508451_tsts.Designer.cs">
-      <DependentUpon>202006261508451_tsts.cs</DependentUpon>
+    <Compile Include="Migrations\202006261522056_Test.cs" />
+    <Compile Include="Migrations\202006261522056_Test.Designer.cs">
+      <DependentUpon>202006261522056_Test.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -1087,6 +1087,7 @@
     <Content Include="Views\Home\FAQ.cshtml" />
     <Content Include="Views\Home\News.cshtml" />
     <Content Include="Views\Home\NewsDetails.cshtml" />
+    <Content Include="Views\Home\Student.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1108,8 +1109,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202006261508451_tsts.resx">
-      <DependentUpon>202006261508451_tsts.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202006261522056_Test.resx">
+      <DependentUpon>202006261522056_Test.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

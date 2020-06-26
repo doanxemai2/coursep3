@@ -29,7 +29,18 @@ namespace CourseP3.Controllers
 
         public ActionResult About()
         {
+
             return View();
+        }
+        public ActionResult Student()
+        {
+            string curentuserid = User.Identity.GetUserId();
+            var Sc = db.StudentCourses.Where(r => r.StudentId == curentuserid).ToList();
+            ApplicationUser st = db.Users.FirstOrDefault(x => x.Id == curentuserid);
+            Semester semester = db.Semesters.FirstOrDefault(r => r.Id == st.SemesterId);
+            ViewBag.stNamee = st.UserName;
+            ViewBag.stSemester = semester.Name;
+            return View(Sc);
         }
         public ActionResult Contact()
         {
@@ -37,15 +48,24 @@ namespace CourseP3.Controllers
         }
         public ActionResult Add(int id)
         {
-            string curentuserid = User.Identity.GetUserId();           
+
+            string curentuserid = User.Identity.GetUserId();
             StudentCourse studentCourse = new StudentCourse();
             studentCourse.CourseId = id;
             studentCourse.StudentId = curentuserid;
             studentCourse.Status = StudentCourse.StudentCourseStatus.Active;
-            db.StudentCourses.Add(studentCourse);
-            db.SaveChanges();
-            ViewBag.Mess = "Save Course Success!!!";
-            return View("Contact");
+            var sc = db.StudentCourses.Where(r=>r.CourseId==id && r.StudentId==curentuserid).ToList();
+            if (sc.Count == 0)
+            {
+                db.StudentCourses.Add(studentCourse);
+                db.SaveChanges();
+                ViewBag.Mess = "Save Course Success!!!";
+            }
+            else
+            {
+                ViewBag.Mess = "You have already signed up for the course!!!";
+            }
+            return View("Index");
         }
         public ActionResult FAQ()
         {

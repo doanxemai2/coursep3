@@ -107,6 +107,9 @@
                                     <a href="/Home/FAQ" class="nav-link text-left">FAQ</a>
                                 </li>
                                 <li>
+                                    <a href="/Home/Student" class="nav-link text-left">Student</a>
+                                </li>
+                                <li>
                                     <a href="/News" class="nav-link text-left">News</a>
                                 </li>
                             </ul>                                                                                                                                                                                                                                                                                          </ul>
@@ -218,6 +221,15 @@
             };
         </script>
     }
+    @if (ViewBag.Messs != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Messs");
+            };
+        </script>
+    }
+    
     <script>
         $(document).on('click', '.panel-heading span.clickable', function (e) {
             var $this = $(this);
