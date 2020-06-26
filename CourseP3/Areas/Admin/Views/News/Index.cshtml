@@ -1,46 +1,194 @@
-﻿@model IEnumerable<CourseP3.Models.News>
+﻿@model PagedList.IPagedList<CourseP3.Models.News>
 
+@using PagedList.Mvc
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="page-container">
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- DATA TABLE -->
+                        <h1 class="title-5 m-b-35">Data Table FAQ</h1>
+                        <div class="table-data__tool">
+                            <div class="table-data__tool-left">
+                                <div class="rs-select2--light rs-select2--md">
+                                    <form action="/Admin/News" method="get" id="listnews">
+                                        <div class="dataTables_length" id="dataTable_length">
+                                            <label>
+                                                List Status
+                                                @Html.DropDownList("listnews", null, new { @class = "custom-select custom-select-sm form-control form-control-sm", style = " height: auto;" })
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="rs-select2--light rs-select2--sm">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th></th>
-    </tr>
+                                    <form action="/Admin/News" method="get" id="pagesize">
+                                        <div class="dataTables_length" id="dataTable_length">
+                                            <label>
+                                                Show
+                                                @Html.DropDownList("pageSize", null, new { @class = "custom-select custom-select-sm form-control form-control-sm", style = " height: auto;" })
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
+                                <button class="au-btn-filter">
+                                    <i class="zmdi zmdi-filter-list"></i>filters
+                                </button>
+                            </div>
+                            <div class="table-data__tool-right">
+                                @Html.ActionLink("Create New", "Create")
+                            </div>
+                        </div>
+                        <div class="table-responsive table-responsive-data2">
+                            <table class="table table-data2">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <input type="checkbox" id="checkAll"> Select All
+                                        </th>
+                                        <th>Question</th>
+                                        <th>Answer</th>
+                                        <th>Status</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr class="tr-shadow">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+                                            <td>
+                                                <input type="checkbox" class="check" value="@item.Id">
+                                            </td>
+                                            <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                                            <td>
+                                                <span class="block-email">
+                                                    @Html.Raw(HttpUtility.HtmlDecode(item.Description))
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <div class="table-data-feature">
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-success">@Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { style = "color:white;text-decoration:none" })</button>
+                                                        <button class="btn btn-primary">@Html.ActionLink("Details", "Details", new { id = item.Id }, new { style = "color:white;text-decoration:none" })</button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                    @*<tr class="spacer"></tr>*@
+                                </tbody>
+                            </table>
+                            <div class=" row mt-3" style="margin:0!important">
+
+                                <div class="form-group col-2">
+                                    <select class="form-control mr-1" style="height:auto" id="select-action">
+                                        <option value="6">--Choose Action--</option>
+                                        <option value="1">Active Return</option>
+                                        <option value="-1">Deleted</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-2">
+                                    <button type="button" class="btn btn-success" id="action_Confirm">Confirm</button>
+                                </div>
+
+                                <div class="col-sm-12 col-md-5">
+                                    <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
+                                </div>
+                                <div class="col-sm-12 col-md-3"></div>
+                                <div class="col-sm-12 col-md-4">
+                                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = ViewBag.psize, listnews = Request.QueryString["listPackage"] }),
+                                   new PagedListRenderOptions()
+                                   {
+                                       LiElementClasses = new List<string> { "text-paging" }
+                                   })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END DATA TABLE -->
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="copyright">
+                        <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $('#checkAll').click(function () {
+            $(".check").prop('checked',
+                $(this).prop('checked'));
+        })
+        $('#action_Confirm').click(function () {
+            var selectedIDs = new Array();
+            var action = $('#select-action').val();
+            if (action == 6) {
+                alert('Please select the action you want to perform!');
+                return;
+            }
+            $('input:checkbox.check').each(function () {
+                if ($(this).prop('checked')) {
+                    selectedIDs.push($(this).val());
+                }
+            });
+            if (selectedIDs.length <= 0) {
+                alert('You have not selected insurance package !');
+                return;
+            }
+            if (confirm("Do you want to delete?")) {
+                changeStatusPTTime(selectedIDs, action);
+            }
+        });
+        function changeStatusPTTime(selectedIDs, action) {
+            $.ajax({
+                url: "/Admin/News/ChangeStatus",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    selectedIDs,
+                    action
+                },
+                success: function (res) {
+                    if (!res == false) {
+                        window.location.reload();
+                    }
+                },
+                error: function () {
+                    alert('error');
+                }
+            });
+        }
+       
+      
+        $(function () {
+            $("#pageSize").change(function (ev, page, pageSize) {
+                var page = $('#page').val();
+                var pageSize = $('select#pageSize option:checked').val();
+                var listnews = $('select#listnews option:checked').val();
+                window.location.href = window.location.href.split('?')[0] + '?listnews=' + listnews + '&page=' + page + '&pageSize=' + pageSize;
+            });
+        });
+        $(function () {
+            $("#listnews").change(function () {
+                $("#listnews").submit();
+            });
+        });
+        
+    </script>
 }
-
-</table>
