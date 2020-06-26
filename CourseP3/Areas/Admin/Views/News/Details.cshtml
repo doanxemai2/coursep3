@@ -10,34 +10,64 @@
 <div>
     <h4>News</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+  </div>
+ <div class="page-container">
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+        <div class="main-content">
+            <div class="section__content section__content--p30">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <strong>Detail FAQ</strong> Form
+                                </div>
+                                <div>
 
-        <dt>
-            @Html.Raw(HttpUtility.HtmlDecode(Model.Description))
-        </dt>
+                                    <dl class="dl-horizontal">
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.Title)
+                                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.Title)
+                                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
+                                        <dt>
+                                            @Html.Raw(HttpUtility.HtmlDecode(Model.Description))
+                                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.Description)
+                                        </dd>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.Status)
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.Status)
+                                        </dd>
+
+                                    </dl>
+                                </div>
+                                <p>
+                                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                                    @Html.ActionLink("Back to List", "Index")
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="copyright">
+                                <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

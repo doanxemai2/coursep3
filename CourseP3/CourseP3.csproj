@@ -599,7 +599,6 @@
     <Content Include="Areas\Admin\Views\CenterDetails\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\CenterDetails\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Courses\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\Index.cshtml" />
@@ -640,7 +639,6 @@
     <Content Include="Areas\Admin\Views\Students\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Students\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\News\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\News\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\News\Details.cshtml" />
     <Content Include="Areas\Admin\Views\News\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\News\Index.cshtml" />

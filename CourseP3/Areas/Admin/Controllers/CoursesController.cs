@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using CourseP3.Areas.Admin.Models;
 using CourseP3.Models;
+using PagedList;
 
 namespace CourseP3.Areas.Admin.Controllers
 {
@@ -16,9 +17,68 @@ namespace CourseP3.Areas.Admin.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Admin/Courses
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString, int? page, int? pageSize, string listcourse)
         {
-            return View(db.Courses.ToList());
+            var courses = db.Courses.Where(x => x.Status == 1);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                courses = db.Courses.Where(x => x.Title.Contains(searchString))
+                    .Where(x => x.Status == 1);
+            }
+
+            ViewBag.PageSize = new List<SelectListItem>()
+            {
+                new SelectListItem() { Text="5", Value= "5"},
+                new SelectListItem() { Text="10", Value= "10"},
+                new SelectListItem() { Text="15", Value= "15" },
+                new SelectListItem() { Text="20", Value= "20" },
+            };
+            ViewBag.listcourse = new List<SelectListItem>()
+            {
+                new SelectListItem() { Text="List", Value= "0" },
+                new SelectListItem() { Text="Delete", Value= "-1"},
+            };
+            switch (listcourse)
+            {
+                case "0":
+                    courses = db.Courses.Where(x => x.Status == 1);
+                    break;
+                case "-1":
+                    courses = db.Courses.Where(x => x.Status == -1);
+                    break;
+            }
+            int pagesize = (pageSize ?? 5);
+            int pageNumber = (page ?? 1);
+            ViewBag.psize = pagesize;
+
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "Date_desc" : "Date";
+            ViewBag.PriceSortParm = sortOrder == "Price" ? "Price_desc" : "Price";
+            switch (sortOrder)
+            {
+                case "Name_desc":
+                    courses = courses.OrderByDescending(s => s.Title);
+                    break;
+
+                default:
+                    courses = courses.OrderBy(s => s.Title);
+                    break;
+            }
+            return View(courses.ToList().ToPagedList(pageNumber, pagesize));
+        }
+        // POST: Admin/News/Delete/5
+        [HttpPost]
+        public ActionResult ChangeStatus(int action, int[] selectedIDs)
+        {
+            foreach (int IDs in selectedIDs)
+            {
+                Course course = db.Courses.Find(IDs);
+                db.Courses.Attach(course);
+                course.Status = action;
+            }
+            db.SaveChanges();
+            return Json(selectedIDs, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Admin/Courses/Details/5
@@ -51,7 +111,17 @@ namespace CourseP3.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Courses.Add(course);
+                var courses = new Course()
+                {
+                    Name = course.Name,
+                    Title = course.Title,
+                    Time = course.Time,
+                    Description = course.Description,
+                    Image = course.Image,
+                    Price = course.Price,
+                    Status = 1,
+                };
+                db.Courses.Add(courses);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -90,31 +160,7 @@ namespace CourseP3.Areas.Admin.Controllers
             return View(course);
         }
 
-        // GET: Admin/Courses/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Course course = db.Courses.Find(id);
-            if (course == null)
-            {
-                return HttpNotFound();
-            }
-            return View(course);
-        }
-
-        // POST: Admin/Courses/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Course course = db.Courses.Find(id);
-            db.Courses.Remove(course);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+      
 
         protected override void Dispose(bool disposing)
         {
