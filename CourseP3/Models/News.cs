@@ -10,13 +10,8 @@ namespace CourseP3.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public NewsStatus  Status { get; set; }
-    public enum NewsStatus
-    {
-        Active = 1,
-        Deactive = 0,
-        Delete = -1
-    }
+        public int  Status { get; set; }
+    
 
     }
 }

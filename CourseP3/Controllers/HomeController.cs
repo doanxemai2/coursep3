@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CourseP3.Areas.Admin.Models;
@@ -85,7 +86,20 @@ namespace CourseP3.Controllers
         }
         public ActionResult News()
         {
-            return View();
+            return View(db.News.ToList());
+        }
+        public ActionResult NewsDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            News news = db.News.Find(id);
+            if (news == null)
+            {
+                return HttpNotFound();
+            }
+            return View(news);
         }
 
         // POST: Home/Edit/5
