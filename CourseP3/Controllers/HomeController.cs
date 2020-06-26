@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CourseP3.Areas.Admin.Models;
 using CourseP3.Models;
+using Microsoft.AspNet.Identity;
 
 namespace CourseP3.Controllers
 {
@@ -30,6 +33,18 @@ namespace CourseP3.Controllers
         public ActionResult Contact()
         {
             return View();
+        }
+        public ActionResult Add(int id)
+        {
+            string curentuserid = User.Identity.GetUserId();           
+            StudentCourse studentCourse = new StudentCourse();
+            studentCourse.CourseId = id;
+            studentCourse.StudentId = curentuserid;
+            studentCourse.Status = StudentCourse.StudentCourseStatus.Active;
+            db.StudentCourses.Add(studentCourse);
+            db.SaveChanges();
+            ViewBag.Mess = "Save Course Success!!!";
+            return View("Contact");
         }
         public ActionResult FAQ()
         {
@@ -65,6 +80,10 @@ namespace CourseP3.Controllers
 
         // GET: Home/Edit/5
         public ActionResult Edit(int id)
+        {
+            return View();
+        }
+        public ActionResult News()
         {
             return View();
         }

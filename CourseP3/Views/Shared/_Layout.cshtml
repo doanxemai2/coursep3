@@ -54,7 +54,7 @@
                         <a href="#" class="small mr-3"><span class="icon-question-circle-o mr-2"></span> Have a questions?</a>
                         @Html.Action("NavBar", "Home")
                         @*<a href="#" class="small mr-3"><span class="icon-phone2 mr-2"></span> @ViewBag.Cen</a>
-        <a href="#" class="small mr-3"><span class="icon-envelope-o mr-2"></span> info@mydomain.com</a>*@
+                            <a href="#" class="small mr-3"><span class="icon-envelope-o mr-2"></span> info@mydomain.com</a>*@
                     </div>
                     <div class="col-lg-3 text-right">
                         @if (Request.IsAuthenticated)
@@ -68,8 +68,7 @@
                         }
                         else
                         {
-                            <a href="@Url.Action("Login", "Account")" class="small mr-3"><span class="icon-unlock-alt"></span> Log In</a>
-                            <a href="@Url.Action("Register", "Account")" class="small btn btn-primary px-4 py-2 rounded-0"><span class="icon-users"></span> Register</a>
+                            <a href="@Url.Action("Login", "Account")" class="small btn btn-primary px-4 py-2 rounded-0"><span class="icon-users"></span> Log In</a>
                         }
                         @*<a href="login.html" class="small mr-3"><span class="icon-unlock-alt"></span> Log In</a>*@
                         @*<a href="register.html" class="small btn btn-primary px-4 py-2 rounded-0"><span class="icon-users"></span> Register</a>*@
@@ -106,6 +105,9 @@
                                 </li>
                                 <li>
                                     <a href="/Home/FAQ" class="nav-link text-left">FAQ</a>
+                                </li>
+                                <li>
+                                    <a href="/News" class="nav-link text-left">News</a>
                                 </li>
                             </ul>                                                                                                                                                                                                                                                                                          </ul>
                         </nav>
@@ -207,6 +209,15 @@
     <script src="~/Scripts/js/jquery.mb.YTPlayer.min.js"></script>
     <script src="~/Scripts/js/main.js"></script>
     @RenderSection("scripts", false)
+
+    @if (ViewBag.Mess != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Mess");
+            };
+        </script>
+    }
     <script>
         $(document).on('click', '.panel-heading span.clickable', function (e) {
             var $this = $(this);
