@@ -1,4 +1,7 @@
-﻿@model IEnumerable<CourseP3.Areas.Admin.Models.Course>
+﻿
+@model PagedList.IPagedList<CourseP3.Areas.Admin.Models.Course>
+
+@using PagedList.Mvc
 
 @{
     ViewBag.Title = "Index";
@@ -16,20 +19,24 @@
                         <div class="table-data__tool">
                             <div class="table-data__tool-left">
                                 <div class="rs-select2--light rs-select2--md">
-                                    <select class="js-select2" name="property">
-                                        <option selected="selected">All Properties</option>
-                                        <option value="">Option 1</option>
-                                        <option value="">Option 2</option>
-                                    </select>
-                                    <div class="dropDownSelect2"></div>
+                                    <form action="/Admin/Courses" method="get" id="listcourse">
+                                        <div class="dataTables_length" id="dataTable_length">
+                                            <label>
+                                                List Status
+                                                @Html.DropDownList("listcourse", null, new { @class = "custom-select custom-select-sm form-control  form-control-sm", style = " height: 40px;" })
+                                            </label>
+                                        </div>
+                                    </form>
                                 </div>
                                 <div class="rs-select2--light rs-select2--sm">
-                                    <select class="js-select2" name="time">
-                                        <option selected="selected">Today</option>
-                                        <option value="">3 Days</option>
-                                        <option value="">1 Week</option>
-                                    </select>
-                                    <div class="dropDownSelect2"></div>
+                                    <form action="/Admin/Courses" method="get" id="pagesize">
+                                        <div class="dataTables_length" id="dataTable_length">
+                                            <label>
+                                                Show
+                                                @Html.DropDownList("pageSize", null, new { @class = "custom-select custom-select-sm form-control  form-control-sm", style = " height: 40px; " })
+                                            </label>
+                                        </div>
+                                    </form>
                                 </div>
                                 <button class="au-btn-filter">
                                     <i class="zmdi zmdi-filter-list"></i>filters
@@ -43,20 +50,19 @@
                             <table class="table table-data2">
                                 <thead>
                                     <tr>
+
                                         <th>
-                                            <label class="au-checkbox">
-                                                <input type="checkbox">
-                                                <span class="au-checkmark"></span>
-                                            </label>
+                                            <input type="checkbox" id="checkAll"> Select All
                                         </th>
+
                                         <th>Name</th>
                                         <th>Title</th>
                                         <th>Time</th>
                                         <th>Description</th>
-                                        <th>Status</th>
+                                    
                                         <th>Image</th>
                                         <th>Price</th>
-                                        <th></th>
+                                       
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -65,10 +71,7 @@
                                         <tr class="tr-shadow">
 
                                             <td>
-                                                <label class="au-checkbox">
-                                                    <input type="checkbox">
-                                                    <span class="au-checkmark"></span>
-                                                </label>
+                                                <input type="checkbox" class="check" value="@item.Id">
                                             </td>
                                             <td>@Html.DisplayFor(modelItem => item.Name)</td>
                                             <td>
@@ -77,15 +80,15 @@
                                             <td class="desc">@Html.DisplayFor(modelItem => item.Time)</td>
                                             <td>@Html.DisplayFor(modelItem => item.Description)</td>
 
-                                            <td>
-                                                <span class="status--process">@Html.DisplayFor(modelItem => item.Status)</span>
-                                            </td>
+                                            
                                             <td><img src="@Html.DisplayFor(modelItem => item.Image)" alt="Alternate Text" /></td>
                                             <td>@Html.DisplayFor(modelItem => item.Price)</td>
                                             <td>
                                                 <div class="table-data-feature">
-                                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-success">@Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { style = "color:white;text-decoration:none" })</button>
+                                                        <button class="btn btn-primary">@Html.ActionLink("Details", "Details", new { id = item.Id }, new { style = "color:white;text-decoration:none" })</button>
+                                                    </div>
                                                 </div>
                                             </td>
 
@@ -94,6 +97,31 @@
                                     @*<tr class="spacer"></tr>*@
                                 </tbody>
                             </table>
+                            <div class=" row mt-3" style="margin:0!important">
+
+                                <div class="form-group col-2">
+                                    <select class="form-control mr-1" style="height:auto" id="select-action">
+                                        <option value="6">--Choose Action--</option>
+                                        <option value="1">Active Return</option>
+                                        <option value="-1">Deleted</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-2">
+                                    <button type="button" class="btn btn-success" id="action_Confirm">Confirm</button>
+                                </div>
+
+                                <div class="col-sm-12 col-md-5">
+                                </div>
+                                <div class="col-sm-12 col-md-3"></div>
+                                <div class="col-sm-12 col-md-4">
+                                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = ViewBag.psize, listcourse = Request.QueryString["listPackage"] }),
+                                   new PagedListRenderOptions()
+                                   {
+                                       LiElementClasses = new List<string> { "text-paging" }
+                                   })
+                                </div>
+                            </div>
                         </div>
                         <!-- END DATA TABLE -->
                     </div>
@@ -109,3 +137,67 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $('#checkAll').click(function () {
+            $(".check").prop('checked',
+                $(this).prop('checked'));
+        })
+        $('#action_Confirm').click(function () {
+            var selectedIDs = new Array();
+            var action = $('#select-action').val();
+            if (action == 6) {
+                alert('Please select the action you want to perform!');
+                return;
+            }
+            $('input:checkbox.check').each(function () {
+                if ($(this).prop('checked')) {
+                    selectedIDs.push($(this).val());
+                }
+            });
+            if (selectedIDs.length <= 0) {
+                alert('You have not selected insurance package !');
+                return;
+            }
+            if (confirm("Do you want to action this?")) {
+                changeStatusPTTime(selectedIDs, action);
+            }
+        });
+        function changeStatusPTTime(selectedIDs, action) {
+            $.ajax({
+                url: "/Admin/Courses/ChangeStatus",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    selectedIDs,
+                    action
+                },
+                success: function (res) {
+                    if (!res == false) {
+                        window.location.reload();
+                    }
+                },
+                error: function () {
+                    alert('error');
+                }
+            });
+        }
+
+
+        $(function () {
+            $("#pageSize").change(function (ev, page, pageSize) {
+                var page = $('#page').val();
+                var pageSize = $('select#pageSize option:checked').val();
+                var listcourse = $('select#listnews option:checked').val();
+                window.location.href = window.location.href.split('?')[0] + '?listcourse=' + listcourse + '&page=' + page + '&pageSize=' + pageSize;
+            });
+        });
+        $(function () {
+            $("#listcourse").change(function () {
+                $("#listcourse").submit();
+            });
+        });
+
+    </script>
+}

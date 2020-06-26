@@ -143,21 +143,7 @@ namespace CourseP3.Areas.Admin.Controllers
             return View(news);
         }
 
-        // GET: Admin/News/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            News news = db.News.Find(id);
-            if (news == null)
-            {
-                return HttpNotFound();
-            }
-            return View(news);
-        }
-
+  
         // POST: Admin/News/Delete/5
         [HttpPost]
         public ActionResult ChangeStatus(int action, int[] selectedIDs)

@@ -21,7 +21,7 @@
                                         <div class="dataTables_length" id="dataTable_length">
                                             <label>
                                                 List Status
-                                                @Html.DropDownList("listnews", null, new { @class = "custom-select custom-select-sm form-control form-control-sm", style = " height: auto;" })
+                                                @Html.DropDownList("listnews", null, new { @class = "custom-select custom-select-sm form-control  form-control-sm", style = " height: 40px;" })
                                             </label>
                                         </div>
                                     </form>
@@ -32,7 +32,7 @@
                                         <div class="dataTables_length" id="dataTable_length">
                                             <label>
                                                 Show
-                                                @Html.DropDownList("pageSize", null, new { @class = "custom-select custom-select-sm form-control form-control-sm", style = " height: auto;" })
+                                                @Html.DropDownList("pageSize", null, new { @class = "custom-select custom-select-sm form-control  form-control-sm", style = " height: 40px; " })
                                             </label>
                                         </div>
                                     </form>
@@ -52,10 +52,10 @@
                                         <th>
                                             <input type="checkbox" id="checkAll"> Select All
                                         </th>
-                                        <th>Question</th>
-                                        <th>Answer</th>
-                                        <th>Status</th>
-                                        <th></th>
+                                        <th>Title</th>
+                                        <th>Description
+                                        </th>
+                                     
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -68,7 +68,7 @@
                                             </td>
                                             <td>@Html.DisplayFor(modelItem => item.Title)</td>
                                             <td>
-                                                <span class="block-email">
+                                                <span class="block-email"style = "display: inline-block; width: 180px;white-space: nowrap;overflow: hidden !important;text-overflow: ellipsis;">
                                                     @Html.Raw(HttpUtility.HtmlDecode(item.Description))
                                                 </span>
                                             </td>
@@ -100,7 +100,6 @@
                                 </div>
 
                                 <div class="col-sm-12 col-md-5">
-                                    <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
                                 </div>
                                 <div class="col-sm-12 col-md-3"></div>
                                 <div class="col-sm-12 col-md-4">
@@ -151,7 +150,7 @@
                 alert('You have not selected insurance package !');
                 return;
             }
-            if (confirm("Do you want to delete?")) {
+            if (confirm("Do you want to action this?")) {
                 changeStatusPTTime(selectedIDs, action);
             }
         });

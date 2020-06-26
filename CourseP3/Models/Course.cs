@@ -17,13 +17,8 @@ namespace CourseP3.Areas.Admin.Models
         public string Description{ get; set; }
         public string Image { get; set; }
         public int Price { get; set; }
-        public CousreStatus Status { get; set; }
+        public int Status { get; set; }
         public virtual ICollection<StudentCourse> StudentCourses { get; set; }
-        public enum CousreStatus
-        {
-            Active = 1,
-            Deactive = 0,
-            Delete = -1
-        }
+       
     }
 }
