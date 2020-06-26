@@ -18,7 +18,24 @@ namespace CourseP3.Areas.Admin.Models
         public string Image { get; set; }
         public int Price { get; set; }
         public int Status { get; set; }
+        public int? SemesterId { get; set; }
+        public virtual Semester Semester { get; set; }
         public virtual ICollection<StudentCourse> StudentCourses { get; set; }
-       
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? CreatedAt { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? UpdatedAt { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? DeletedAt { get; set; }
+        public Course()
+        {
+            CreatedAt = DateTime.Now;
+            UpdatedAt = DateTime.Now;
+
+            Status = 1;
+        }
     }
 }

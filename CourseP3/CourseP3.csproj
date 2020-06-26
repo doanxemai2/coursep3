@@ -178,6 +178,7 @@
     <Compile Include="Areas\Admin\Controllers\CoursesController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\FAQsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StudentCoursesController.cs" />
     <Compile Include="Areas\Admin\Controllers\StudentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\SemestersController.cs" />
@@ -190,6 +191,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006261508451_tsts.cs" />
+    <Compile Include="Migrations\202006261508451_tsts.Designer.cs">
+      <DependentUpon>202006261508451_tsts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CenterDetail.cs" />
     <Compile Include="Models\Course.cs" />
@@ -1003,6 +1009,11 @@
     <Content Include="Areas\Admin\Views\Semesters\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Semesters\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Semesters\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\StudentCourses\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\StudentCourses\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\StudentCourses\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\StudentCourses\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\StudentCourses\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\styles.js" />
     <Content Include="Scripts\ckeditor\vendor\promise.js" />
@@ -1095,6 +1106,11 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202006261508451_tsts.resx">
+      <DependentUpon>202006261508451_tsts.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
