@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -16,7 +17,26 @@ namespace CourseP3.Models
         public string Address { get; set; }
         public string Phone { get; set; }
         public int? SemesterId { get; set; }
+        public int Status { get; set; }
+        public virtual Semester Semester { get; set; }
         public virtual ICollection<StudentCourse> StudentCourses { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? CreatedAt { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? UpdatedAt { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? DeletedAt { get; set; }
+
+        public ApplicationUser()
+        {
+            CreatedAt = DateTime.Now;
+            UpdatedAt = DateTime.Now;
+      
+            Status = 1;
+        }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

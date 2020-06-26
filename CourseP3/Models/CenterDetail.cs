@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -17,6 +18,23 @@ namespace CourseP3.Areas.Admin.Models
             Active = 1,
             Deactive = 0,
             Delete = -1
+        }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? CreatedAt { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? UpdatedAt { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? DeletedAt { get; set; }
+
+        public CenterDetail()
+        {
+            CreatedAt = DateTime.Now;
+            UpdatedAt = DateTime.Now;
+
+            Status = CenterDetailStatus.Active;
         }
     }
 }
