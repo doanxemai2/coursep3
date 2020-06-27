@@ -28,7 +28,7 @@ namespace CourseP3.Controllers
             StudentCourse studentCourse = new StudentCourse();
             studentCourse.CourseId = id;
             studentCourse.StudentId = curentuserid;
-            studentCourse.Status = StudentCourse.StudentCourseStatus.Active;
+            studentCourse.Status = 1;
             var sc = db.StudentCourses.Where(r => r.CourseId == id && r.StudentId == curentuserid).ToList();
             var Cs = db.Courses.Find(id);
             var idSm = Cs.SemesterId;
