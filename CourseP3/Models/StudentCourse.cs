@@ -15,7 +15,7 @@ namespace CourseP3.Models
         public string StudentId { get; set; }
         public int CourseId { get; set; }
         public int Point { get; set; }
-        public StudentCourseStatus Status { get; set; }
+        public int Status { get; set; }
         public virtual Course Course { get; set; }
         public virtual ApplicationUser Student { get; set; }
         [DataType(DataType.Date)]
