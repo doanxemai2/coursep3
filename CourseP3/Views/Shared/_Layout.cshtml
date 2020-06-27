@@ -214,20 +214,18 @@
     <script src="~/Scripts/js/main.js"></script>
     @RenderSection("scripts", false)
 
-    @if (ViewBag.Mess != null)
+    @if (TempData["succers"] != null)
     {
         <script type="text/javascript">
-            window.onload = function () {
-                alert("@ViewBag.Mess");
-            };
+
+                alert(@Html.Raw(Json.Encode(TempData["succers"])));
         </script>
     }
-    @if (ViewBag.Messs != null)
+    @if (TempData["err"] != null)
     {
         <script type="text/javascript">
-            window.onload = function () {
-                alert("@ViewBag.Messs");
-            };
+
+                alert(@Html.Raw(Json.Encode(TempData["err"])));
         </script>
     }
 
@@ -246,7 +244,7 @@
         })
     </script>
 
-    
+
 </body>
 
 </html>
