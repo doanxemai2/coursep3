@@ -14,6 +14,9 @@
                         <div class="table-data__tool">
                             <div class="table-data__tool-left">
                                 <div class="rs-select2--light rs-select2--md">
+                                    Tìm kiếm <input type="text" name="Autocomplete" value="" class="form-control typeahead" data-provide="typeahead" />
+                                </div>
+                                <div class="rs-select2--light rs-select2--md">
                                     <select class="js-select2" name="property">
                                         <option selected="selected">All Properties</option>
                                         <option value="">Option 1</option>
@@ -66,37 +69,37 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach (var item in Model)
-                                {
-                                    <tr class="tr-shadow">
-                                        <td>
-                                            <label class="au-checkbox">
-                                                <input type="checkbox">
-                                                <span class="au-checkmark"></span>
-                                            </label>
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Email)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Fullname)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Address)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Phone)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.SemesterId)
-                                        </td>
-                                        <td>
-                                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                                        </td>
-                                    </tr>
-                                }
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr class="tr-shadow">
+                                            <td>
+                                                <label class="au-checkbox">
+                                                    <input type="checkbox">
+                                                    <span class="au-checkmark"></span>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Email)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Fullname)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Address)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Phone)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.SemesterId)
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                            </td>
+                                        </tr>
+                                    }
                                 </tbody>
                             </table>
                         </div>
@@ -107,3 +110,40 @@
         </div>
     </div>
 </div>
+@section scripts
+{
+    <script type="text/javascript" src="~/Scripts/bootstrap3-typeahead.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var $input = $('.typeahead');
+            $input.typeahead({
+                autoSelect: true,
+                source: function (query, process) {
+                    $.ajax({
+                        url: '/Admin/Students/GetListStudentData',
+                        type: 'GET',
+                        success: function(response) {
+                            $.each (response, function() {
+                                this.name = this.FullName + ' - ' + this.Email;
+                            });
+                            return process(response);
+                        }
+                    });
+                }
+            });
+            $input.change(function() {
+                var current = $input.typeahead("getActive");
+                if (current) {
+                    // Some item from your model is active!
+                    if (current.name == $input.val()) {
+                        var url = 'https://' + $(location).attr('host');
+                        window.location.href = `${url}/Admin/Students/Index?email=${current.Email}`;
+                    } else {
+                       
+                    }
+                } else {
+                }
+            });
+        });
+    </script>
+}
