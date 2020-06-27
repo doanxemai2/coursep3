@@ -191,7 +191,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+
     <Compile Include="Migrations\Configuration.cs" />
+
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CenterDetail.cs" />
     <Compile Include="Models\Course.cs" />
@@ -1001,16 +1003,13 @@
     <Content Include="Scripts\ckeditor\package.json" />
     <Content Include="Scripts\ckeditor\LICENSE.md" />
     <Content Include="Scripts\ckeditor\CHANGES.md" />
-    <Content Include="Areas\Admin\Views\Semesters\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Semesters\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Semesters\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Semesters\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Semesters\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\StudentCourses\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\StudentCourses\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\StudentCourses\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\StudentCourses\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\StudentCourses\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Semesters\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Semesters\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Semesters\Delete.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\styles.js" />
     <Content Include="Scripts\ckeditor\vendor\promise.js" />
