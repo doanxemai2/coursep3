@@ -52,7 +52,7 @@
                 </ul>
 
                 <p>
-                    <a href="#" class="btn btn-primary rounded-0 btn-lg px-5">Enroll</a>
+                    @Html.ActionLink("Enroll", "Add", new { id = @Model.Id }, new { @class = "btn btn-primary rounded-0 btn-lg px-5" })
                 </p>
 
             </div>

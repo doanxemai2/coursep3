@@ -1,0 +1,85 @@
+﻿@model IEnumerable<CourseP3.Models.StudentCourse>
+@{
+    ViewBag.Title = "Student";
+}
+
+<div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../../images/bg_1.jpg')">
+    <div class="container">
+        <div class="row align-items-end">
+            <div class="col-lg-7">
+                <h2 class="mb-0">Contact</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="custom-breadcrumns border-bottom">
+    <div class="container">
+        <a href="index.html">Home</a>
+        <span class="mx-3 icon-keyboard_arrow_right"></span>
+        <span class="current">Student</span>
+    </div>
+</div>
+<div>
+    <h1 class="text-center" style="color:black">Information Student</h1>
+</div>
+<div>
+    <form class="text-center">
+        <h3>Student Name : @ViewBag.stNamee</h3>       
+        <h3>Semester Name : @ViewBag.stSemester</h3>
+        @foreach (var item in Model)
+        {
+            <h3> Course : <span> @item.Course.Name</span> :<span style="color:green"> @item.Status</span> : <span style="color:red">@item.Point % </span></h3>
+        }
+    </form>
+</div>
+<fieldset>
+    <div id="legend">
+        <legend class="">Register</legend>
+    </div>
+    <div class="control-group">
+        <!-- Username -->
+        <label class="control-label" for="username">Username</label>
+        <div class="controls">
+            <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
+            <p class="help-block">Username can contain any letters or numbers, without spaces</p>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <!-- E-mail -->
+        <label class="control-label" for="email">E-mail</label>
+        <div class="controls">
+            <input type="text" id="email" name="email" placeholder="" class="input-xlarge">
+            <p class="help-block">Please provide your E-mail</p>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <!-- Password-->
+        <label class="control-label" for="password">Password</label>
+        <div class="controls">
+            <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
+            <p class="help-block">Password should be at least 4 characters</p>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <!-- Password -->
+        <label class="control-label" for="password_confirm">Password (Confirm)</label>
+        <div class="controls">
+            <input type="password" id="password_confirm" name="password_confirm" placeholder="" class="input-xlarge">
+            <p class="help-block">Please confirm password</p>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <!-- Button -->
+        <div class="controls">
+            <button class="btn btn-success">Register</button>
+        </div>
+    </div>
+</fieldset>
+
