@@ -51,10 +51,34 @@ namespace CourseP3.Areas.Admin.Controllers
                 _userManager = value;
             }
         }
-        // GET: Admin/Students
-        public ActionResult Index()
+
+        public ActionResult GetListStudentData()
         {
-            return View(db.Users.ToList());
+            var role = db.Roles.Where(x => x.Name == "Student").FirstOrDefault();
+            var students = db.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains(role.Id)).ToList();
+            return new JsonResult()
+            {
+                Data = students.Select(x => new
+                {
+                    FullName = x.Fullname,
+                    Email = x.Email
+                }),
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        // GET: Admin/Students
+        public ActionResult Index(string email)
+        {
+            var role = db.Roles.Where(x => x.Name == "Student").FirstOrDefault();
+            var students = db.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains(role.Id)).ToList();
+            if (!String.IsNullOrEmpty(email))
+            {
+                students = students.Where(x => x.Email == email).ToList();
+                return View(students);
+            }
+            
+            return View(students);
         }
 
         public ActionResult Details(string id)
