@@ -53,12 +53,16 @@ namespace CourseP3.Controllers
             StudentCourse studentCourse = new StudentCourse();
             studentCourse.CourseId = id;
             studentCourse.StudentId = curentuserid;
+
             studentCourse.Status = StudentCourse.StudentCourseStatus.Active;
             var sc = db.StudentCourses.Where(r => r.CourseId == id && r.StudentId == curentuserid).ToList();
             var Cs = db.Courses.Find(id);
             var idSm = Cs.SemesterId;
             var idSmUser = db.Users.Find(curentuserid).Id;
             if (sc.Count == 0 && idSm.Equals(idSmUser))
+
+
+            
             {
                 db.StudentCourses.Add(studentCourse);
                 db.SaveChanges();
@@ -68,8 +72,10 @@ namespace CourseP3.Controllers
             {
                 TempData["err"] = "You have already signed up for the course or Your course is incorrect!!!";
             }
+
             //return RedirectToAction("Index", "Home");
             return RedirectToAction("Student", "Home");
+
         }
         public ActionResult FAQ()
         {

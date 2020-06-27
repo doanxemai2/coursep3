@@ -51,13 +51,37 @@ namespace CourseP3.Areas.Admin.Controllers
                 _userManager = value;
             }
         }
-        // GET: Admin/Students
-        public ActionResult Index()
+
+        public ActionResult GetListStudentData()
         {
-            return View(db.Users.ToList());
+            var role = db.Roles.Where(x => x.Name == "Student").FirstOrDefault();
+            var students = db.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains(role.Id)).ToList();
+            return new JsonResult()
+            {
+                Data = students.Select(x => new
+                {
+                    FullName = x.Fullname,
+                    Email = x.Email
+                }),
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
         }
 
-        public ActionResult Details(string id)
+        // GET: Admin/Students
+        public ActionResult Index(string email)
+        {
+            var role = db.Roles.Where(x => x.Name == "Student").FirstOrDefault();
+            var students = db.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains(role.Id)).ToList();
+            if (!String.IsNullOrEmpty(email))
+            {
+                students = students.Where(x => x.Email == email).ToList();
+                return View(students);
+            }
+            
+            return View(students);
+        }
+
+        public ActionResult Details(string id, int? sem)
         {
             if (id == null)
             {
@@ -68,7 +92,23 @@ namespace CourseP3.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            var semester = db.Semesters.Where(x => x.Id <= user.SemesterId).ToList();
+            ViewBag.semmesters = semester;
+            if (sem != null) {
+                  var studentCourses = db.StudentCourses.Include(s => s.Course).Include(s => s.Student).Where(s=>s.Student.Id.Equals(user.Id)).Where(s=>s.Course.SemesterId==sem).ToList();
+                ViewBag.studentCourses = studentCourses;
+
+            }
             return View(user);
+        }
+        [HttpPost]
+        public ActionResult ChangePoint(int id, int value)
+        {
+                StudentCourse studentCourse = db.StudentCourses.Find(id);
+                db.StudentCourses.Attach(studentCourse);
+            studentCourse.Point = value;
+            db.SaveChanges();
+            return Json(id, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Create()
         {
