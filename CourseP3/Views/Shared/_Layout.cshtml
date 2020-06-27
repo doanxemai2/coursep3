@@ -64,6 +64,9 @@
                             {
                                 @Html.AntiForgeryToken()
                                 <a href="#" class="small mr-3">@User.Identity.GetUserName()</a>
+
+                                <a href="/Home/Student" class="small btn btn-primary px-4 py-2 rounded-0">Student</a>
+
                                 <a href="javascript:document.getElementById('logoutForm').submit()" class="small btn btn-primary px-4 py-2 rounded-0">Logout</a>
                             }
                         }
@@ -107,9 +110,7 @@
                                 <li>
                                     <a href="/Home/FAQ" class="nav-link text-left">FAQ</a>
                                 </li>
-                                <li>
-                                    <a href="/Home/Student" class="nav-link text-left">Student</a>
-                                </li>
+
                                 <li>
                                     <a href="/News" class="nav-link text-left">News</a>
                                 </li>
