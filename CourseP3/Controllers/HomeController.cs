@@ -48,7 +48,6 @@ namespace CourseP3.Controllers
         }
         public ActionResult Add(int id)
         {
-
             string curentuserid = User.Identity.GetUserId();
             StudentCourse studentCourse = new StudentCourse();
             studentCourse.CourseId = id;
@@ -65,7 +64,7 @@ namespace CourseP3.Controllers
             {
                 ViewBag.Mess = "You have already signed up for the course!!!";
             }
-            return View("Index");
+            return View("About");
         }
         public ActionResult FAQ()
         {
