@@ -72,20 +72,21 @@ namespace CourseP3.Areas.Admin.Controllers
         }
         public ActionResult Create()
         {
+            ViewBag.SemesterId = new SelectList(db.Semesters, "Id", "Name");
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Email,Phone,Fullname,Password, Address")] Student model)
+        public async Task<ActionResult> Create([Bind(Include = "Email,Phone,Fullname, Address, SemesterId")] Student model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Phone = model.Phone, Fullname = model.Fullname, Address = model.Address};
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Phone = model.Phone, Fullname = model.Fullname, Address = model.Address, SemesterId = model.SemesterId};
+                var result = await UserManager.CreateAsync(user, "password");
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
+                    UserManager.AddToRole(user.Id, "Student");
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -112,6 +113,7 @@ namespace CourseP3.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.SemesterId = new SelectList(db.Semesters, "Id", "Name", student.SemesterId);
             return View(student);
         }
 
@@ -120,7 +122,7 @@ namespace CourseP3.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Phone,Fullname,Address")] ApplicationUser model)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Phone,Fullname,Address,SemesterId")] ApplicationUser model)
         {
             if (ModelState.IsValid)
             {
@@ -132,6 +134,7 @@ namespace CourseP3.Areas.Admin.Controllers
                 user.Fullname = model.Fullname;
                 user.Address = model.Address;
                 user.Phone = model.Phone;
+                user.SemesterId = model.SemesterId;
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
