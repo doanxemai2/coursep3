@@ -13,5 +13,6 @@ namespace CourseP3.Models
         public string Email { get; set; }
         public string Password { get; set; }
         public int SemesterId { get; set; }
+        public List<StudentCourse> StudentCourses { get; set; }
     }
 }

@@ -93,6 +93,8 @@ namespace CourseP3.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            var sc = db.StudentCourses.Include(x=>x.Course).Where(s => s.Course.Id == course.Id).ToList();
+            ViewBag.StudentCourses = sc;
             return View(course);
         }
 
