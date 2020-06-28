@@ -25,34 +25,38 @@ namespace CourseP3.Controllers
             {
                 searchString = currentFilter;
             }
-          
-
             ViewBag.CurrentFilter = searchString;
             if (!String.IsNullOrEmpty(searchString))
             {
                 course = db.Courses.Where(s => s.Name.Contains(searchString)
                                        );
             }
-            switch (listCourse)
+            if (!String.IsNullOrEmpty(listCourse))
             {
-                case "All":
-                    course = db.Courses.Where(x => x.Status != -1);
-                    break;
-                case "1":
-                    course = db.Courses.Where(x => x.SemesterId == 1).Where(x => x.Status != -1);
-                    break;
-                case "2":
-                    course = db.Courses.Where(x => x.SemesterId == 2).Where(x => x.Status != -1);
-                    break;
-                case "3":
-                    course = db.Courses.Where(x => x.SemesterId == 3).Where(x => x.Status != -1);
-                    break;
-                case "4":
-                    course = db.Courses.Where(x => x.SemesterId == 4).Where(x => x.Status != -1);
-                    break;
-              
-                        
+
+                switch (listCourse)
+                {
+                    case "All":
+                        course = db.Courses.Where(x => x.Status != -1);
+                        break;
+                    case "1":
+                        course = db.Courses.Where(x => x.SemesterId == 1).Where(x => x.Status != -1);
+                        break;
+                    case "2":
+                        course = db.Courses.Where(x => x.SemesterId == 2).Where(x => x.Status != -1);
+                        break;
+                    case "3":
+                        course = db.Courses.Where(x => x.SemesterId == 3).Where(x => x.Status != -1);
+                        break;
+                    case "4":
+                        course = db.Courses.Where(x => x.SemesterId == 4).Where(x => x.Status != -1);
+                        break;
+
+
+                }
+                ViewBag.Currentlistcourse = listCourse;
             }
+          
             int pagesize = (pageSize ?? 6);
             int pageNumber = (page ?? 1);
             ViewBag.psize = pagesize;

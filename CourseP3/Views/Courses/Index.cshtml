@@ -17,34 +17,34 @@
     }
 
 
-            .pagination  li {
+        .pagination li {
+            display: block;
+            float: left;
+            margin: 0 5px;
+        }
+
+            .pagination li a, .pagination li a {
+                background: #fff none repeat scroll 0 0;
+                color: #3ca060;
                 display: block;
-                float: left;
-                margin: 0 5px;
+                font-weight: 600;
+                height: 30px;
+                line-height: 30px;
+                width: 30px;
             }
 
-                .pagination li a, .pagination li a {
-                    background: #fff none repeat scroll 0 0;
-                    color: #3ca060;
-                    display: block;
-                    font-weight: 600;
-                    height: 30px;
+                .pagination li a i {
+                    font-size: 24px;
                     line-height: 30px;
-                    width: 30px;
                 }
 
-                    .pagination  li a i {
-                        font-size: 24px;
-                        line-height: 30px;
-                    }
 
 
-
-                    .pagination li.active a, .pagination li a:hover {
-                        background: #3ca060 none repeat scroll 0 0;
-                        color: #fff;
-                    }
-                    }
+                .pagination li.active a, .pagination li a:hover {
+                    background: #3ca060 none repeat scroll 0 0;
+                    color: #fff;
+                }
+    }
 </style>
 <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../../images/bg_1.jpg')">
     <div class="container">
@@ -68,33 +68,35 @@
     </div>
 </div>
 
-    <div class="container">
-        <div id="myBtnContainer" class="text-center row" style="padding-top:50px">
-          
-                <div class="form-group col-4">
-                    <form action="/Courses"  id="listCourse" method="get">
-                        <select class="form-control" name="listCourse" id="listCourseselect">
-                            <option selected>Select list</option>
-                            <option   value="All">Show all</option>
-                            @foreach (var se in ViewBag.Semes)
-                            {
-                                <option value="@se.Id">@se.Name</option>
-                            }
-                        </select>
-                    </form>
-                </div>
-                <div class="col-8">
-                    <form action="/Courses" method="get">
-                        <div id="dataTable_filter" class="dataTables_filter">
-                           @Html.TextBox("SearchString", ViewBag.CurrentFilter as string,new {@class="form-control form-control-sm", style = "width: 100%;font-size:1rem ;padding: 0.375rem 0.75rem;height: calc(2.25rem + 2px); ", placeholder = "Search" , onkeypress = "handle(e)" })
+<div class="container">
+    <div id="myBtnContainer" class="text-center row" style="padding-top:50px">
 
-                        </div>
-                    </form>
-
-                </div>
-            
+        <div class="form-group col-4">
+            <form action="/Courses" id="listCourse" method="get">
+                <select class="form-control" name="listCourse" id="listCourseselect">
+                    <option selected>Select list</option>
+                    <option value="All">Show all</option>
+                    
+                    @foreach (var se in ViewBag.Semes)
+                    {
+                        
+                        <option @ViewBag.Currentlistcourse==@se.Id ? 'selected' :'' value="@se.Id">@se.Name</option>
+                    }
+                </select>
+            </form>
         </div>
+        <div class="col-8">
+            <form action="/Courses" method="get">
+                <div id="dataTable_filter" class="dataTables_filter">
+                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control form-control-sm", style = "width: 100%;font-size:1rem ;padding: 0.375rem 0.75rem;height: calc(2.25rem + 2px); ", placeholder = "Search", onkeypress = "handle(e)" })
+
+                </div>
+            </form>
+
+        </div>
+
     </div>
+</div>
 
 
 
@@ -113,23 +115,25 @@
     width: 85%;
     white-space: nowrap;
     overflow: hidden !important;
-    text-overflow: ellipsis;">@item.Name</h3>
-                            </div>
-                        </figure>
-                        <div class="course-1-content pb-4">
-                            <div class="rating text-center mb-3">
-                                <span class="icon-star2 text-warning"></span>
-                                <span class="icon-star2 text-warning"></span>
-                                <span class="icon-star2 text-warning"></span>
-                                <span class="icon-star2 text-warning"></span>
-                                <span class="icon-star2 text-warning"></span>
-                            </div>
-                            <p style="height:100px" class="desc  mb-4">@item.Description.</p>
-                            <p><a href="/Courses/Detail/@item.Id" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
-                        </div>
-                    </div>
-                </div>
-            }
+    text-overflow: ellipsis;">
+                                    @item.Name
+</h3>
+</div>
+</figure>
+<div class="course-1-content pb-4">
+    <div class="rating text-center mb-3">
+        <span class="icon-star2 text-warning"></span>
+        <span class="icon-star2 text-warning"></span>
+        <span class="icon-star2 text-warning"></span>
+        <span class="icon-star2 text-warning"></span>
+        <span class="icon-star2 text-warning"></span>
+    </div>
+    <p style="height:100px" class="desc  mb-4">@item.Description.</p>
+    <p><a href="/Courses/Detail/@item.Id" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
+</div>
+</div>
+</div>
+}
         </div>
         <div class="col-sm-12 col-md-4" style="    margin-left: 34%;
     margin-top: 3%;">
@@ -189,7 +193,7 @@
             }
         }
     </script>
-    }
+}
 <script>
 
 
