@@ -6,9 +6,6 @@
 }
 
 <h2>Index</h2>
-
-
-
 <div class="page-container">
     <div class="main-content">
         <div class="section__content section__content--p30">
@@ -197,15 +194,6 @@
             });
         }
 
-
-        $(function () {
-            $("#pageSize").change(function (ev, page, pageSize) {
-                var page = $('#page').val();
-                var pageSize = $('select#pageSize option:checked').val();
-                var listStudentcourse = $('select#listnews option:checked').val();
-                window.location.href = window.location.href.split('?')[0] + '?listStudentcourse=' + listStudentcourse + '&page=' + page + '&pageSize=' + pageSize;
-            });
-        });
         $(function () {
             $("#listStudentcourse").change(function () {
                 $("#listStudentcourse").submit();

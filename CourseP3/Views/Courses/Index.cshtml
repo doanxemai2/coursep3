@@ -1,15 +1,59 @@
-﻿@model IEnumerable<CourseP3.Areas.Admin.Models.Course>
+﻿
+@model PagedList.IPagedList<CourseP3.Areas.Admin.Models.Course>
+@using PagedList.Mvc
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    .pagination {
+        border-radius: 0;
+        clear: both;
+        display: block;
+        margin-bottom: 0;
+        text-align: center;
+        width: 100%;
+    }
+
+
+            .pagination  li {
+                display: block;
+                float: left;
+                margin: 0 5px;
+            }
+
+                .pagination li a, .pagination li a {
+                    background: #fff none repeat scroll 0 0;
+                    color: #3ca060;
+                    display: block;
+                    font-weight: 600;
+                    height: 30px;
+                    line-height: 30px;
+                    width: 30px;
+                }
+
+                    .pagination  li a i {
+                        font-size: 24px;
+                        line-height: 30px;
+                    }
+
+
+
+                    .pagination li.active a, .pagination li a:hover {
+                        background: #3ca060 none repeat scroll 0 0;
+                        color: #fff;
+                    }
+                    }
+</style>
 <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../../images/bg_1.jpg')">
     <div class="container">
         <div class="row align-items-end">
             <div class="col-lg-7">
                 <h2 class="mb-0">Courses</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+                <p>
+                    Course selection by term.
+                </p>
             </div>
         </div>
     </div>
@@ -23,15 +67,35 @@
         <span class="current">Courses</span>
     </div>
 </div>
-<div>
-    <div id="myBtnContainer" class="text-center" style="padding-top:50px">
-        <button class="btn btn-success" onclick="filterSelection('all')"> Show all</button>
-        @foreach (var se in ViewBag.Semes)
-        {
-            <button class="btn btn-success" onclick="filterSelection('@se.Name')">@se.Name</button>
-        }
+
+    <div class="container">
+        <div id="myBtnContainer" class="text-center row" style="padding-top:50px">
+          
+                <div class="form-group col-4">
+                    <form action="/Courses"  id="listCourse" method="get">
+                        <select class="form-control" name="listCourse" id="listCourseselect">
+                            <option selected>Select list</option>
+                            <option   value="All">Show all</option>
+                            @foreach (var se in ViewBag.Semes)
+                            {
+                                <option value="@se.Id">@se.Name</option>
+                            }
+                        </select>
+                    </form>
+                </div>
+                <div class="col-8">
+                    <form action="/Courses" method="get">
+                        <div id="dataTable_filter" class="dataTables_filter">
+                           @Html.TextBox("SearchString", ViewBag.CurrentFilter as string,new {@class="form-control form-control-sm", style = "width: 100%;font-size:1rem ;padding: 0.375rem 0.75rem;height: calc(2.25rem + 2px); ", placeholder = "Search" , onkeypress = "handle(e)" })
+
+                        </div>
+                    </form>
+
+                </div>
+            
+        </div>
     </div>
-</div>
+
 
 
 <div class="site-section">
@@ -45,11 +109,14 @@
                             <a href="/Courses/Detail/@item.Id"><img src="@item.Image" alt="Image" class="img-fluid"></a>
                             <div class="price">$@item.Price</div>
                             <div class="category">
-                                <h3>@item.Name</h3>
+                                <h3 style=" display: inline-block;
+    width: 85%;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;">@item.Name</h3>
                             </div>
                         </figure>
                         <div class="course-1-content pb-4">
-                            <h2>@item.Description</h2>
                             <div class="rating text-center mb-3">
                                 <span class="icon-star2 text-warning"></span>
                                 <span class="icon-star2 text-warning"></span>
@@ -57,12 +124,20 @@
                                 <span class="icon-star2 text-warning"></span>
                                 <span class="icon-star2 text-warning"></span>
                             </div>
-                            <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
+                            <p style="height:100px" class="desc  mb-4">@item.Description.</p>
                             <p><a href="/Courses/Detail/@item.Id" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
                         </div>
                     </div>
                 </div>
             }
+        </div>
+        <div class="col-sm-12 col-md-4" style="    margin-left: 34%;
+    margin-top: 3%;">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = ViewBag.psize, SearchString = ViewBag.CurrentFilter, listCourse = Request.QueryString["listCourse"] }),
+           new PagedListRenderOptions()
+           {
+               LiElementClasses = new List<string> { "text-paging" }
+           })
         </div>
     </div>
 </div>
@@ -94,7 +169,32 @@
         </div>
     </div>
 </div>
+@section Scripts{
+    <script>
+
+        $("#listCourseselect").change(function () {
+            $("#listCourse").submit();
+        });
+        $(function () {
+            $("#pageSize").change(function (ev, page, pageSize) {
+                var page = $('#page').val();
+                var pageSize = $('select#pageSize option:checked').val();
+                var listCourse = $('select#listCourseselect option:checked').val();
+                window.location.href = window.location.href.split('?')[0] + '?listCourse=' + listCourse + '&page=' + page + '&pageSize=' + pageSize;
+            });
+        });
+        function handle(e) {
+            if (e.keyCode === 13) {
+                e.preventDefault();
+            }
+        }
+    </script>
+    }
 <script>
+
+
+
+
     filterSelection("all")
     function filterSelection(c) {
         var x, i;

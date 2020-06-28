@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using CourseP3.Areas.Admin.Models;
 using CourseP3.Models;
 using Microsoft.AspNet.Identity;
+using PagedList;
 
 namespace CourseP3.Controllers
 {
@@ -15,12 +16,47 @@ namespace CourseP3.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Courses
-        public ActionResult Index()
+        public ActionResult Index(int? page, int? pageSize, string currentFilter, string searchString, string listCourse)
         {
             var Semester = db.Semesters.ToList();
             ViewBag.Semes = Semester;
+            var course = db.Courses.Where(x=>x.Status!=-1);
+            if (searchString == null)
+            {
+                searchString = currentFilter;
+            }
+          
 
-            return View(db.Courses.ToList());
+            ViewBag.CurrentFilter = searchString;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                course = db.Courses.Where(s => s.Name.Contains(searchString)
+                                       );
+            }
+            switch (listCourse)
+            {
+                case "All":
+                    course = db.Courses.Where(x => x.Status != -1);
+                    break;
+                case "1":
+                    course = db.Courses.Where(x => x.SemesterId == 1).Where(x => x.Status != -1);
+                    break;
+                case "2":
+                    course = db.Courses.Where(x => x.SemesterId == 2).Where(x => x.Status != -1);
+                    break;
+                case "3":
+                    course = db.Courses.Where(x => x.SemesterId == 3).Where(x => x.Status != -1);
+                    break;
+                case "4":
+                    course = db.Courses.Where(x => x.SemesterId == 4).Where(x => x.Status != -1);
+                    break;
+              
+                        
+            }
+            int pagesize = (pageSize ?? 6);
+            int pageNumber = (page ?? 1);
+            ViewBag.psize = pagesize;
+            return View(course.ToList().ToPagedList(pageNumber, pagesize));
         }
         public ActionResult Add(int id)
         {
@@ -28,7 +64,7 @@ namespace CourseP3.Controllers
             StudentCourse studentCourse = new StudentCourse();
             studentCourse.CourseId = id;
             studentCourse.StudentId = curentuserid;
-            studentCourse.Status = 1;
+            studentCourse.Status = 2;
             var sc = db.StudentCourses.Where(r => r.CourseId == id && r.StudentId == curentuserid).ToList();
             var Cs = db.Courses.Find(id);
             var idSm = Cs.SemesterId;

@@ -51,13 +51,13 @@
         <div class="py-2 bg-light">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-lg-9 d-none d-lg-block">
+                    <div class="col-lg-7 d-none d-lg-block">
                         <a href="#" class="small mr-3"><span class="icon-question-circle-o mr-2"></span> Have a questions?</a>
                         @Html.Action("NavBar", "Home")
                         @*<a href="#" class="small mr-3"><span class="icon-phone2 mr-2"></span> @ViewBag.Cen</a>
                             <a href="#" class="small mr-3"><span class="icon-envelope-o mr-2"></span> info@mydomain.com</a>*@
                     </div>
-                    <div class="col-lg-3 text-right">
+                    <div class="col-lg-5 text-right">
                         @if (Request.IsAuthenticated)
                         {
                             using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -65,7 +65,7 @@
                                 @Html.AntiForgeryToken()
                                 <a href="#" class="small mr-3">@User.Identity.GetUserName()</a>
 
-                                <a href="/Home/Student" class="small btn btn-primary px-4 py-2 rounded-0">Student</a>
+                                <a href="/Home/Student" class="small btn btn-primary px-4 py-2 rounded-0">Student management</a>
 
                                 <a href="javascript:document.getElementById('logoutForm').submit()" class="small btn btn-primary px-4 py-2 rounded-0">Logout</a>
                             }
