@@ -17,7 +17,7 @@ namespace CourseP3.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            ViewBag.Courses = db.Courses.ToList();
+            ViewBag.Courses = db.Courses.Where(x=>x.Status!=-1).ToList();
             return View();
         }
 

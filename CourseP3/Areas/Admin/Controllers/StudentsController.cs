@@ -94,6 +94,7 @@ namespace CourseP3.Areas.Admin.Controllers
             }
             var semester = db.Semesters.Where(x => x.Id <= user.SemesterId).ToList();
             ViewBag.semmesters = semester;
+
             if (sem != null) {
                   var studentCourses = db.StudentCourses.Include(s => s.Course).Include(s => s.Student).Where(s=>s.Student.Id.Equals(user.Id)).Where(s=>s.Course.SemesterId==sem).ToList();
                 ViewBag.studentCourses = studentCourses;
