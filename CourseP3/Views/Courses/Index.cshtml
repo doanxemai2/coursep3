@@ -5,7 +5,6 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <style>
     .pagination {
         border-radius: 0;
@@ -74,13 +73,13 @@
         <div class="form-group col-4">
             <form action="/Courses" id="listCourse" method="get">
                 <select class="form-control" name="listCourse" id="listCourseselect">
-                    <option selected>Select list</option>
+                    <option disabled>Select list</option>
                     <option value="All">Show all</option>
                     
                     @foreach (var se in ViewBag.Semes)
                     {
                         
-                        <option @ViewBag.Currentlistcourse==@se.Id ? 'selected' :'' value="@se.Id">@se.Name</option>
+                        <option selected="@(ViewBag.Currentlistcourse == se.Id.ToString() ? "selected" : null)" value="@se.Id">@se.Name</option>
                     }
                 </select>
             </form>
