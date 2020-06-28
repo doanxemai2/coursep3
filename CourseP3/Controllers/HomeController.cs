@@ -65,7 +65,7 @@ namespace CourseP3.Controllers
             var sc = db.StudentCourses.Where(r => r.CourseId == id && r.StudentId == curentuserid).ToList();
             var Cs = db.Courses.Find(id);
             var idSm = Cs.SemesterId;
-            var idSmUser = db.Users.Find(curentuserid).Id;
+            var idSmUser = db.Users.Find(curentuserid).SemesterId;
             if (sc.Count == 0 && idSm.Equals(idSmUser))
 
 
