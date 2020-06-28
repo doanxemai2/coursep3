@@ -1,8 +1,10 @@
-﻿@model CourseP3.Areas.Admin.Models.Course
+﻿@using CourseP3.Models
+@model CourseP3.Areas.Admin.Models.Course
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var sc = ViewBag.StudentCourses as List<StudentCourse>;
 }
 
 <h2>Details</h2>
@@ -10,7 +12,7 @@
 <div>
     <h4>Course</h4>
     <hr />
-   </div>
+</div>
 <div class="page-container">
 
     <div class="main-content">
@@ -23,77 +25,103 @@
                                 <strong>Detail FAQ</strong> Form
                             </div>
                             <div>
+                                <table class="table table-data2">
+                                    <thead>
+                                        <tr>
 
-                                <dl class="dl-horizontal">
-                                    <dt>
-                                        @Html.DisplayNameFor(model => model.Name)
-                                    </dt>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Name)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Image)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Price)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Description)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Status)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.CreatedAt)
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                                    <dd>
-                                        @Html.DisplayFor(model => model.Name)
-                                    </dd>
+                                        <tr class="tr-shadow">
 
-                                    <dt>
-                                        @Html.DisplayNameFor(model => model.Title)
-                                    </dt>
-
-                                    <dd>
-                                        @Html.DisplayFor(model => model.Title)
-                                    </dd>
-
-                                    <dt>
-                                        @Html.DisplayNameFor(model => model.Time)
-                                    </dt>
-
-                                    <dd>
-                                        @Html.DisplayFor(model => model.Time)
-                                    </dd>
-
-                                    <dt>
-                                        @Html.DisplayNameFor(model => model.Description)
-                                    </dt>
-
-                                    <dd>
-                                        @Html.DisplayFor(model => model.Description)
-                                    </dd>
-                                    <dt>
-                                        @Html.DisplayNameFor(model => model.Image)
-                                    </dt>
-                                    <dt>
-                                        <img src="@Url.Content(Model.Image)" alt="Alternate Text" />
-                                    </dt>
-
-                                  
-                                    <dt>
-                                        @Html.DisplayNameFor(model => model.Price)
-                                    </dt>
-
-                                    <dd>
-                                        @Html.DisplayFor(model => model.Price)
-                                    </dd>
-
-                                    <dt>
-                                        @Html.DisplayNameFor(model => model.Status)
-                                    </dt>
-
-                                    <dd>
-                                        @Html.DisplayFor(model => model.Status)
-                                    </dd>
-
-                                </dl>
+                                            <td>
+                                                @Html.DisplayFor(model => model.Name)
+                                            </td>
+                                            <td>
+                                                <img src="@Url.Content(Model.Image)" alt="@Model.Name" />
+                                            </td>
+                                            <td>
+                                                $ @Html.DisplayFor(model => model.Price)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => model.Description)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => model.Status)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => model.CreatedAt)
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                                                @Html.ActionLink("Back to List", "Index")
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                            <p>
-                                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-                                @Html.ActionLink("Back to List", "Index")
-                            </p>
+                            <div>
+                                <h1>List student in course</h1>
+                                <table class="table table-data2">
+                                    @if (sc != null)
+                                    {
+                                        <thead>
+                                            <tr>
 
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>StatusCourse</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in sc)
+                                            {
+
+
+                                                <tr class="tr-shadow">
+
+
+                                                    <td> @item.Student.Fullname</td>
+                                                    <td>@item.Student.Email</td>
+                                                    <td>
+                                                        <input type="number" name="name" maxlength="2" id="input-@item.Id" style="text-align: center; width: 50px; height: 32px; border: solid 1px" max="10" min="0" class="inputpoint" value="@item.Point"/>
+                                                        <span> <button onclick="editpoint(@item.Id)" id="btnedit-@item.Id" class=" btn btn-success"><i class="fas fa-edit"></i></button></span><span> <button style="display: none" onclick="savepoint(@item.Id)" id="btnsave-@item.Id" class=" btn btn-success"><i class="fas fa-check"></i></button></span>
+                                                    </td>
+
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    }
+                                </table>
+                            </div>
                         </div>
 
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="copyright">
-                            <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="copyright">
+                                <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -101,3 +129,39 @@
         </div>
     </div>
 </div>
+@section Scripts {
+
+    <script>
+        $(".inputpoint").prop('disabled', true);
+        function editpoint(id) {
+
+            $("#input-" + id).prop('disabled', false);
+            $("#btnedit-" + id).css("display", "none");
+            $("#btnsave-" + id).css("display", "inline-block");
+        }
+        function savepoint(id) {
+            var value = parseInt($("#input-" + id).val());
+            if (confirm("Do you want to action this?")) {
+
+                $.ajax({
+                    url: "/Admin/Students/ChangePoint",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        id,
+                        value
+                    },
+                    success: function (res) {
+                        if (!res == false) {
+                            window.location.reload();
+                        }
+                    },
+                    error: function () {
+                        alert('error');
+                    }
+                });
+
+            }
+        }
+    </script>
+}
