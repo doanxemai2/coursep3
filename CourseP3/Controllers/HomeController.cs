@@ -35,10 +35,17 @@ namespace CourseP3.Controllers
         public ActionResult Student()
         {
             string curentuserid = User.Identity.GetUserId();
-            var Sc = db.StudentCourses.Where(r => r.StudentId == curentuserid).ToList();
+            var Sc = db.StudentCourses.Where(r => r.StudentId == curentuserid && r.Course.SemesterId == 1).ToList();
+            var sm2 = db.StudentCourses.Where(r => r.StudentId == curentuserid && r.Course.SemesterId == 2).ToList();
+            var sm3 = db.StudentCourses.Where(r => r.StudentId == curentuserid && r.Course.SemesterId == 3).ToList();
+            var sm4 = db.StudentCourses.Where(r => r.StudentId == curentuserid && r.Course.SemesterId == 4).ToList();
             ApplicationUser st = db.Users.FirstOrDefault(x => x.Id == curentuserid);
             Semester semester = db.Semesters.FirstOrDefault(r => r.Id == st.SemesterId);
             ViewBag.stNamee = st.UserName;
+            ViewBag.CurrentUser = st;
+            ViewBag.sm2 = sm2;
+            ViewBag.sm3 = sm3;
+            ViewBag.sm4 = sm4;
             ViewBag.stSemester = semester.Name;
             return View(Sc);
         }
@@ -62,11 +69,11 @@ namespace CourseP3.Controllers
             if (sc.Count == 0 && idSm.Equals(idSmUser))
 
 
-            
+
             {
                 db.StudentCourses.Add(studentCourse);
                 db.SaveChanges();
-                TempData["succers"]= "Save Course Success!!!";
+                TempData["succers"] = "Save Course Success!!!";
             }
             else
             {

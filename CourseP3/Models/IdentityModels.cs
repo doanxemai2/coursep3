@@ -49,7 +49,7 @@ namespace CourseP3.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("MyDbContext", throwIfV1Schema: false)
+            : base("MyDbContext")
         {
         }
 

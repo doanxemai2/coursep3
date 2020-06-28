@@ -25,14 +25,261 @@
 <div>
     <h1 class="text-center" style="color:black">Information Student</h1>
 </div>
-<div>
-    <form class="text-center">
-        <h3>Student Name : @ViewBag.stNamee</h3>       
-        <h3>Semester Name : @ViewBag.stSemester</h3>
-        @foreach (var item in Model)
-        {
-            <h3> Course : <span> @item.Course.Name</span> :<span style="color:green"> @item.Status</span> : <span style="color:red">@item.Point % </span></h3>
-        }
+@*<div>
+        <form class="text-center">
+            <h3>Student Name : @ViewBag.stNamee</h3>
+            <h3>Semester Name : @ViewBag.stSemester</h3>
+            @foreach (var item in Model)
+            {
+                <h3> Course : <span> @item.Course.Name</span> :<span style="color:green"> @item.Status</span> : <span style="color:red">@item.Point % </span></h3>
+            }
+        </form>
+    </div>*@
+
+<div class="container emp-profile">
+    <form method="post">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt="" />
+                    <div class="file btn btn-lg btn-primary">
+                        Change Photo
+                        <input type="file" name="file" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h5>
+                        <p>@ViewBag.CurrentUser.UserName</p>
+                    </h5>
+                    
+                    <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Semester1</a>
+                        </li><li class="nav-item">
+                                 <a class="nav-link" id="semester2-tab" data-toggle="tab" href="#semester2" role="tab" aria-controls="semester2" aria-selected="false">Semester2</a>
+                        </li><li class="nav-item">
+                                 <a class="nav-link" id="semester3-tab" data-toggle="tab" href="#semester3" role="tab" aria-controls="semester3" aria-selected="false">Semester3</a>
+                        </li><li class="nav-item">
+                                 <a class="nav-link" id="semester4-tab" data-toggle="tab" href="#semester4" role="tab" aria-controls="semester4" aria-selected="false">Semester4</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-work">
+                    <p>WORK LINK</p>
+                    <a href="">Website Link</a><br />
+                    <a href="">Bootsnipp Profile</a><br />
+                    <a href="">Bootply Profile</a>
+                    <p>SKILLS</p>
+                    <a href="">Web Designer</a><br />
+                    <a href="">Web Developer</a><br />
+                    <a href="">WordPress</a><br />
+                    <a href="">WooCommerce</a><br />
+                    <a href="">PHP, .Net</a><br />
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>User Id</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@ViewBag.CurrentUser.Id</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Name</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@ViewBag.CurrentUser.UserName</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Email</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@ViewBag.CurrentUser.Email</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Phone</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@ViewBag.CurrentUser.Phone</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Address</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@ViewBag.CurrentUser.Address</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Semester1</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Course</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label>CourseStatus</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Point</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            @foreach (var item in Model)
+                            {
+                                <div class="col-md-3">
+                                    <label>Semester One</label>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <p>@item.Course.Name</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>@item.Status</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>@item.Point</p>
+                                </div>
+                            }
+
+                        </div>
+                        
+                    </div>
+                    <div class="tab-pane fade" id="semester2" role="tabpanel" aria-labelledby="semester2-tab">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Semester2</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Course</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label>CourseStatus</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Point</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            @foreach (var item in ViewBag.sm2)
+                            {
+                                <div class="col-md-3">
+                                    <label>Semester Two</label>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <p>@item.Course.Name</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>@item.Status</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>@item.Point</p>
+                                </div>
+                            }
+
+                        </div>
+                        
+                    </div><div class="tab-pane fade" id="semester3" role="tabpanel" aria-labelledby="semester3-tab">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Semester3</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Course</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label>CourseStatus</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Point</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            @foreach (var item in ViewBag.sm3)
+                            {
+                                <div class="col-md-3">
+                                    <label>Semester Three</label>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <p>@item.Course.Name</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>@item.Status</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>@item.Point</p>
+                                </div>
+                            }
+
+                        </div>
+                        
+                    </div>
+                    <div class="tab-pane fade" id="semester4" role="tabpanel" aria-labelledby="semester4-tab">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Semester4</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Course</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label>CourseStatus</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Point</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            @foreach (var item in ViewBag.sm4)
+                            {
+                                <div class="col-md-3">
+                                    <label>Semester Four</label>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <p>@item.Course.Name</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>@item.Status</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>@item.Point</p>
+                                </div>
+                            }
+
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
 </div>
 
