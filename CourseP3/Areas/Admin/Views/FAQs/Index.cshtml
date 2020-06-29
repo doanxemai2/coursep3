@@ -32,7 +32,7 @@
                                     </button>
                                 </div>
                                 <div class="table-data__tool-right">
-                                    @Html.ActionLink("Create New", "Create")
+                                    <button class="btn btn-primary">@Html.ActionLink("Create New", "Create", null, new { style = "color:white;text-decoration:none" })</button>
                                 </div>
                             </div>
                             <div class="table-responsive table-responsive-data2">
@@ -71,7 +71,7 @@
                                             <td>
                                                 <span class="status--process">@Html.DisplayFor(modelItem => item.Status)</span>
                                             </td>
-                                            <td>
+                                            <td style="width:15%">
                                                 <div class="table-data-feature">
                                                     <div class="btn-group">
                                                         <button class="btn btn-success">@Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { style = "color:white;text-decoration:none" })</button>

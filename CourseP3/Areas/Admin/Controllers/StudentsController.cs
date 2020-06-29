@@ -96,7 +96,7 @@ namespace CourseP3.Areas.Admin.Controllers
             ViewBag.semmesters = semester;
 
             if (sem != null) {
-                  var studentCourses = db.StudentCourses.Include(s => s.Course).Include(s => s.Student).Where(s=>s.Student.Id.Equals(user.Id)).Where(s=>s.Course.SemesterId==sem).ToList();
+                  var studentCourses = db.StudentCourses.Include(s => s.Course).Include(s => s.Student).Where(s=>s.Student.Id.Equals(user.Id)).Where(s=>s.Course.SemesterId==sem).Where(x=>x.Status!=-1).ToList();
                 ViewBag.studentCourses = studentCourses;
 
             }
@@ -108,6 +108,7 @@ namespace CourseP3.Areas.Admin.Controllers
                 StudentCourse studentCourse = db.StudentCourses.Find(id);
                 db.StudentCourses.Attach(studentCourse);
             studentCourse.Point = value;
+            studentCourse.Status = 1;
             db.SaveChanges();
             return Json(id, JsonRequestBehavior.AllowGet);
         }

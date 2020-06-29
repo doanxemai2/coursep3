@@ -13,7 +13,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <!-- DATA TABLE -->
-                        <h1 class="title-5 m-b-35">Data Table FAQ</h1>
+                        <h1 class="title-5 m-b-35">Data Table Student Courses</h1>
                         <div class="table-data__tool">
                             <div class="table-data__tool-left">
                                 <div class="rs-select2--light rs-select2--md">
@@ -42,9 +42,7 @@
                                     <i class="zmdi zmdi-filter-list"></i>filters
                                 </button>
                             </div>
-                            <div class="table-data__tool-right">
-                                @Html.ActionLink("Create New", "Create")
-                            </div>
+
                         </div>
                         <div class="table-responsive table-responsive-data2">
                             <table class="table table-data2">
@@ -75,38 +73,62 @@
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
+                                    <tr>
 
+                                        <td>
+                                            <input type="checkbox" class="check" value="@item.Id">
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Course.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Student.Fullname)
+                                        </td>
+                                      
+                                        @if (item.Status == 1)
+                                        {
                                             <td>
-                                                <input type="checkbox" class="check" value="@item.Id">
+                                                Completed
                                             </td>
+                                        }
+                                        @if (item.Status == 0)
+                                        {
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.Course.Name)
+                                                Learning
                                             </td>
+                                        }
+                                        @if (item.Status == -1)
+                                        {
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.Student.Fullname)
+                                                Delete
                                             </td>
+                                        }
+                                        @if (item.Status == 2)
+                                        {
+                                            <td>
+                                                Active
+                                            </td>
+                                        }
 
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Status)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.CreatedAt)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Student.Semester.Name)
-                                            </td>
 
 
-                                            <td>
-                                                <div class="table-data-feature">
-                                                    <div class="btn-group">
-                                                        <button class="btn btn-success">@Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { style = "color:white;text-decoration:none" })</button>
-                                                        <button class="btn btn-primary">@Html.ActionLink("Details", "Details", new { id = item.Id }, new { style = "color:white;text-decoration:none" })</button>
-                                                    </div>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CreatedAt)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Student.Semester.Name)
+                                        </td>
+
+
+                                        <td>
+                                            <div class="table-data-feature">
+                                                <div class="btn-group">
+                                                    <button class="btn btn-success">@Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { style = "color:white;text-decoration:none" })</button>
+                                                    <button class="btn btn-primary">@Html.ActionLink("Details", "Details", new { id = item.Id }, new { style = "color:white;text-decoration:none" })</button>
                                                 </div>
-                                            </td>
-                                        </tr>
+                                            </div>
+                                        </td>
+                                    </tr>
                                     }
                                 </tbody>
                             </table>

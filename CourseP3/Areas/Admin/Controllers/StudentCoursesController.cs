@@ -87,6 +87,7 @@ namespace CourseP3.Areas.Admin.Controllers
                 StudentCourse studentCourse = db.StudentCourses.Find(IDs);
                 db.StudentCourses.Attach(studentCourse);
                 studentCourse.Status = action;
+               
             }
             db.SaveChanges();
             return Json(selectedIDs, JsonRequestBehavior.AllowGet);
