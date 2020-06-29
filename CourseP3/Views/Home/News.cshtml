@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row align-items-end">
             <div class="col-lg-7">
-                <h2 class="mb-0">About Us</h2>
+                <h2 class="mb-0">News</h2>
                 <p>Symphony Ltd. is private institute related to IT and Software industries.</p>
             </div>
         </div>
@@ -18,30 +18,33 @@
 
 <div class="custom-breadcrumns border-bottom">
     <div class="container">
-        <a href="#">Home</a>
+        <a href="/Home">Home</a>
         <span class="mx-3 icon-keyboard_arrow_right"></span>
-        <span class="current">About Us</span>
+        <span class="current">News</span>
     </div>
 </div>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            @foreach (var item in Model)
-            {
+<div class="site-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                @foreach (var item in Model)
+                {
 
-                <div class="post-entry-big horizontal d-flex mb-4">
-                    <a href="news-single.html" class="img-link mr-4"><img src="~/images/blog_1.jpg" alt="Image" class="img-fluid"></a>
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <a href="#">June 6, 2019</a>
-                            <span class="mx-1">/</span>
-                            <a href="#">Admission</a>, <a href="#">Updates</a>
+                    <div class="post-entry-big horizontal d-flex mb-4">
+                        <a href="news-single.html" class="img-link mr-4"><img src="~/images/blog_1.jpg" alt="Image" class="img-fluid"></a>
+                        <div class="post-content">
+                            <div class="post-meta">
+                                <a href="#">June 6, 2019</a>
+                                <span class="mx-1">/</span>
+                                <a href="#">Admission</a>, <a href="#">Updates</a>
+                            </div>
+                            <h3 class="post-heading"><a href="news-single.html">@item.Title</a></h3>
                         </div>
-                        <h3 class="post-heading"><a href="news-single.html">@item.Title</a></h3>
                     </div>
-                </div>
-            }
+                }
 
             </div>
+        </div>
     </div>
 </div>
+    
