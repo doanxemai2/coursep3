@@ -10,7 +10,13 @@ namespace CourseP3.Models
     {
         [Key]
         public int Id { get; set; }
+        [Required(ErrorMessage = "Please enter facility Name.")]
+        [Display(Name = "Name")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "Name is only allowed between 2 - 50 characters.")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Please enter facility Time.")]
+        [Display(Name = "Time")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "Time is only allowed between 2 - 50 characters.")]
         public string Time { get; set; }
         public int Status { get; set; }
         public virtual ICollection<StudentCourse> StudentCourses { get; set; }
