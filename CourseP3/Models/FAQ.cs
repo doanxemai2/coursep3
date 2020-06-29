@@ -9,7 +9,13 @@ namespace CourseP3.Areas.Admin.Models
     public class FAQ
     {
         public int Id { get; set; }
+        [Required(ErrorMessage = "Please enter facility Question.")]
+        [Display(Name = "Question")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "Question is only allowed between 2 - 50 characters.")]
         public string Question { get; set; }
+        [Required(ErrorMessage = "Please enter facility Answer.")]
+        [Display(Name = "Answer")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "Answer is only allowed between 2 - 50 characters.")]
         public string Answer { get; set; }
         public FAQStatus Status { get; set; }
         public enum FAQStatus

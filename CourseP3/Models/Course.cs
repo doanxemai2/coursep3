@@ -11,8 +11,17 @@ namespace CourseP3.Areas.Admin.Models
     {
         [Key]
         public int Id { get; set; }
+        //[Required(ErrorMessage = "Please enter facility Name.")]
+        //[Display(Name = "Name")]
+        //[StringLength(50, MinimumLength = 2, ErrorMessage = "Name is only allowed between 2 - 50 characters.")]
         public string Name { get; set; }
+        //[Required(ErrorMessage = "Please enter facility Title.")]
+        //[Display(Name = "Title")]
+        //[StringLength(50, MinimumLength = 2, ErrorMessage = "Title is only allowed between 2 - 50 characters.")]
         public string Title { get; set; }
+        //[Required(ErrorMessage = "Please enter facility Time.")]
+        //[Display(Name = "Time")]
+        //[StringLength(50, MinimumLength = 2, ErrorMessage = "Time is only allowed between 2 - 50 characters.")]
         public string Time { get; set; }
         public string Description{ get; set; }
         public string Image { get; set; }
@@ -34,7 +43,6 @@ namespace CourseP3.Areas.Admin.Models
         {
             CreatedAt = DateTime.Now;
             UpdatedAt = DateTime.Now;
-
             Status = 1;
         }
     }
