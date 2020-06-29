@@ -3,9 +3,9 @@
 <div>
     <h4>ApplicationUser</h4>
     <hr />
- 
+
 </div>
- 
+
 
 <div class="page-container">
 
@@ -67,7 +67,9 @@
                                 </table>
 
                             </div>
-
+                            <h2 class="ml-4">
+                                Course information for students
+                            </h2>
                             <p>
                                 @foreach (var item in ViewBag.semmesters)
                                 {
@@ -99,31 +101,73 @@
 
 
                                             <td> @item.Course.Name</td>
+                                            @if (item.Point == 0)
+                                            {
                                             <td>
-                                                <input type="number" name="name" maxlength="2" id="input-@item.Id" style="text-align:center;width:50px;height:32px ;border:solid 1px" max="10" min="0" class="inputpoint" value="@item.Point" />
-                                                <span> <button onclick="editpoint(@item.Id)" id="btnedit-@item.Id" class=" btn btn-success"><i class="fas fa-edit"></i></button></span><span> <button style="display:none" onclick="savepoint(@item.Id)" id="btnsave-@item.Id" class=" btn btn-success"><i class="fas fa-check"></i></button></span>
+                                                <span id="p-@item.Id"> - -</span>  <span> <button onclick="editpoint(@item.Id)" id="btnedit-@item.Id" class=" btn btn-success"><i class="fas fa-edit"></i></button></span>
+                                                <span> <button style="display:none" onclick="savepoint(@item.Id)" id="btnsave-@item.Id" class=" btn btn-success"><i class="fas fa-check"></i></button></span>
+                                                <input type="number" name="name" maxlength="2" id="input-@item.Id" style="text-align:center; display:none;width:50px;height:32px ;border:solid 1px" max="10" min="0" class="inputpoint" value="@item.Point" />
+
                                             </td>
-                                            @if (item.Point <= 4)
+                                               
+                                            }
+                                            else
+                                            {
+                                                <td>
+
+                                                    <input type="number" name="name" maxlength="2" id="input-@item.Id" style="text-align:center;width:50px;height:32px ;border:solid 1px" max="10" min="0" class="inputpoint" value="@item.Point" />
+                                                    <span> <button onclick="editpoint(@item.Id)" id="btnedit-@item.Id" class=" btn btn-success"><i class="fas fa-edit"></i></button></span><span> <button style="display:none" onclick="savepoint(@item.Id)" id="btnsave-@item.Id" class=" btn btn-success"><i class="fas fa-check"></i></button></span>
+                                                </td>
+                                            }
+                                            @if (item.Point == 0)
+                                            {
+                                                <td >--</td>
+
+                                            }
+                                            @if (item.Point <= 4 && item.Point > 0)
                                             {
 
                                                 <td style="color:red">Notpass</td>
                                             }
-                                            else
+                                            @if (item.Point > 4)
                                             {
                                                 <td style="color:forestgreen">Pass</td>
                                             }
 
 
-                                            <td>@item.Status</td>
+                                            @if (item.Status == 1)
+                                            {
+                                                <td>
+                                                    Completed
+                                                </td>
+                                            }
+                                            @if (item.Status == 0)
+                                            {
+                                                <td>
+                                                    Learning
+                                                </td>
+                                            }
+                                            @if (item.Status == -1)
+                                            {
+                                                <td>
+                                                    Delete
+                                                </td>
+                                            }
+                                            @if (item.Status == 2)
+                                            {
+                                                <td>
+                                                    Active
+                                                </td>
+                                            }
 
                                         </tr>
                                         }
-                                       
+
 
 
                                     </tbody>
                                 }
-                                </table>
+                            </table>
 
                         </div>
 
@@ -149,34 +193,37 @@
         <script>
             $(".inputpoint").prop('disabled', true);
             function editpoint(id) {
-   
+
                 $("#input-" + id).prop('disabled', false);
-                $("#btnedit-" + id).css("display","none")
-                $("#btnsave-" + id).css("display","inline-block")
+                $("#btnedit-" + id).css("display", "none")
+                $("#btnsave-" + id).css("display", "inline-block")
+                $("#p-" + id).css("display", "none")
+                $("#input-" + id).css("display", "inline-block")
+
             }
             function savepoint(id) {
                 var value = parseInt($("#input-" + id).val());
                 if (confirm("Do you want to action this?")) {
-                   
-                        $.ajax({
-                            url: "/Admin/Students/ChangePoint",
-                            type: "POST",
-                            dataType: "json",
-                            data: {
-                                id,
-                                value
-                            },
-                            success: function (res) {
-                                if (!res == false) {
-                                    window.location.reload();
-                                }
-                            },
-                            error: function () {
-                                alert('error');
+
+                    $.ajax({
+                        url: "/Admin/Students/ChangePoint",
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            id,
+                            value
+                        },
+                        success: function (res) {
+                            if (!res == false) {
+                                window.location.reload();
                             }
-                        });
-                    
+                        },
+                        error: function () {
+                            alert('error');
+                        }
+                    });
+
                 }
             }
         </script>
-        }
+    }

@@ -43,7 +43,8 @@
                                 </button>
                             </div>
                             <div class="table-data__tool-right">
-                                @Html.ActionLink("Create New", "Create")
+                                <button class="btn btn-primary">@Html.ActionLink("Create New", "Create", null, new { style = "color:white;text-decoration:none" })</button>
+
                             </div>
                         </div>
                         <div class="table-responsive table-responsive-data2">
@@ -51,13 +52,12 @@
                                 <thead>
                                     <tr>
 
-                                        <th>
+                                        <th style="width: 9%;">
                                             <input type="checkbox" id="checkAll"> Select All
                                         </th>
 
                                         <th>Name</th>
-                                        <th>Title</th>
-                                        <th>Time</th>
+                                  
                                         <th>Description</th>
                                     
                                         <th>Image</th>
@@ -71,20 +71,20 @@
                                         <tr class="tr-shadow">
 
                                             <td>
-                                                @item.Id<input type="checkbox" class="check" value="@item.Id">
+                                               <input type="checkbox" class="check" value="@item.Id">
                                             </td>
                                             <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                                            <td>
-                                                <span class="block-email">@Html.DisplayFor(modelItem => item.Title)</span>
-                                            </td>
-                                            <td class="desc">@Html.DisplayFor(modelItem => item.Time)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                                       
+                                            <td>@Html.DisplayFor(modelItem => item.Description ,new { style= " display: inline-block; width: 180px;white - space: nowrap; overflow: hidden !important; text - overflow: ellipsis; "})</td>
 
-                                            
-                                            <td><img src="@Html.DisplayFor(modelItem => item.Image)" alt="Alternate Text" /></td>
-                                            <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                                            <td>
-                                                <div class="table-data-feature">
+
+                                                                                    <td><img src="@Html.DisplayFor(modelItem => item.Image)" alt="Alternate Text" /></td>
+                                        
+                                                                                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                        
+                                                                                    <td style="    width: 14%;">
+                                        
+                                                                                        <div class="table-data-feature">
                                                     <div class="btn-group">
                                                         <button class="btn btn-success">@Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { style = "color:white;text-decoration:none" })</button>
                                                         <button class="btn btn-primary">@Html.ActionLink("Details", "Details", new { id = item.Id }, new { style = "color:white;text-decoration:none" })</button>

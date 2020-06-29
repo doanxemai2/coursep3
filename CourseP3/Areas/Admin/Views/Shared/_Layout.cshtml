@@ -25,6 +25,11 @@
     <link href="/Content/assets/css/theme.css" rel="stylesheet" media="all">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <style>
+        a{
+            text-decoration:none!important
+        }
+    </style>
 </head>
 <body class="animsition">
     <div class="page-wrapper">
@@ -54,13 +59,13 @@
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="/Admin/FAQs/Index">
-                                <i class="fas fa-tachometer-alt"></i>List-FAQ
+                                <i class="fas fa-question"></i>FAQ
                             </a>
 
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="/Admin/CenterDetails/Index">
-                                <i class="fas fa-tachometer-alt"></i>List-CenterDetail
+                                <i class="fas fa-address-card"></i>CenterDetail
                             </a>
 
                         </li>
@@ -109,36 +114,56 @@
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="/Admin/FAQs/Index">
-                                <i class="fas fa-table"></i>List-FAQ
+                                <i class="fas fa-question"></i>FAQ
                             </a>
 
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="/Admin/CenterDetails/Index">
-                                <i class="fas fa-table"></i>List-CenterDetail
+                                <i class="fas fa-address-card"></i>CenterDetail
                             </a>
 
                         </li>
                         @*<li>
-                            <a href="/Admin/Dashboard/Chart">
-                                <i class="fas fa-chart-bar"></i>Charts
-                            </a>
-                        </li>*@
+            <a href="/Admin/Dashboard/Chart">
+                <i class="fas fa-chart-bar"></i>Charts
+            </a>
+        </li>*@
                         @*<li>
-                            <a href="/Admin/Dashboard/Table">
-                                <i class="fas fa-table"></i>Tables
-                            </a>
-                        </li>*@
+            <a href="/Admin/Dashboard/Table">
+                <i class="fas fa-table"></i>Tables
+            </a>
+        </li>*@
                         <li>
                             <a href="/Admin/Courses/Index">
-                                <i class="fas fa-table"></i>Courses
+                                <i class="fas fa-book"></i>Courses
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Admin/StudentCourses/Index">
+                                <i class="fas fa-address-book"></i>StudentCourses
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Admin/Students/Index">
+                                <i class="fas fa-user"></i>Students
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Admin/News/Index">
+                                <i class="fas fa-newspaper-o"></i>News
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Admin/Semesters/Index">
+                                <i class="fas fa-table"></i>Semesters
                             </a>
                         </li>
                         @*<li>
-                            <a href="/Admin/Dashboard/Form">
-                                <i class="far fa-check-square"></i>Forms
-                            </a>
-                        </li>*@
+            <a href="/Admin/Dashboard/Form">
+                <i class="far fa-check-square"></i>Forms
+            </a>
+        </li>*@
                     </ul>
                 </nav>
             </div>

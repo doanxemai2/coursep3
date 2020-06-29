@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <!-- DATA TABLE -->
-                        <h1 class="title-5 m-b-35">Data Table CenterDetail</h1>
+                        <h1 class="title-5 m-b-35">Data Table Student</h1>
                         <div class="table-data__tool">
                             <div class="table-data__tool-left">
                                 <div class="rs-select2--light rs-select2--md">
@@ -37,7 +37,7 @@
                                 </button>
                             </div>
                             <div class="table-data__tool-right">
-                                @Html.ActionLink("Create New", "Create")
+                                <button class="btn btn-primary">@Html.ActionLink("Create New", "Create", null, new { style = "color:white;text-decoration:none" })</button>
                             </div>
                         </div>
                         <div class="table-responsive table-responsive-data2">
@@ -63,7 +63,7 @@
                                             @Html.DisplayNameFor(model => model.Phone)
                                         </th>
                                         <th>
-                                            @Html.DisplayNameFor(model => model.SemesterId)
+                                            @Html.DisplayNameFor(model => model.Semester)
                                         </th>
                                         <th></th>
                                     </tr>
@@ -91,12 +91,17 @@
                                                 @Html.DisplayFor(modelItem => item.Phone)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.SemesterId)
+                                                @Html.DisplayFor(modelItem => item.Semester.Name)
                                             </td>
                                             <td>
-                                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                                <div class="table-data-feature">
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-success">@Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { style = "color:white;text-decoration:none" })</button>
+                                                        <button class="btn btn-primary">@Html.ActionLink("Details", "Details", new { id = item.Id }, new { style = "color:white;text-decoration:none" })</button>
+                                                        <button class="btn btn-danger">  @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { style = "color:white;text-decoration:none" })</button>
+                                                    </div>
+                                                </div>
+                                             
                                             </td>
                                         </tr>
                                     }
