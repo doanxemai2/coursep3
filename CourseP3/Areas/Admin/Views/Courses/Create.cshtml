@@ -62,8 +62,7 @@
                                         @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
                                             <button type="button" class="btn btn-primary" id="upload_widget">Upload files</button>
-                                            <ul id="preview">
-                                            </ul>
+                                            <img id="preview" width="180px" src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://d15cw65ipctsrr.cloudfront.net/ca/8934e0188711e69d2049c17d0d6907/twenty20_54db5e50-8425-4ffd-a4fd-8ba5b4813b9a.jpg?auto=format%2Ccompress&dpr=1&w=510&h=315&fit=crop"/>
                                             @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control hidden" } })
                                             @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
                                         </div>
@@ -77,7 +76,13 @@
                                         </div>
                                     </div>
 
-                                
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.SemesterId, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.DropDownList("SemesterId", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.SemesterId, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
 
                                     <div class="form-group">
                                         <div class="col-md-offset-2 col-md-10">
@@ -109,17 +114,18 @@
     <script type="text/javascript">
         var myWidget = cloudinary.createUploadWidget({
                 cloudName: 'kuramakyubi',
-            uploadPreset: 'vzg8snty',
-                crop: "fit",
-                width: 510,
-                height: 315
+                uploadPreset: 'vzg8snty',
+                //crop: "fit",
+                //width: 510,
+                //height: 315
                 //croppingCoordinatesMode: 'custom'
                     
             },
             (error, result) => {
                 if (!error && result && result.event === "success") {
-                    $("#preview").append('<img width="50%" src="' + result.info.url + '"/>');
-                    $("input[name ='Image']").val(result.info.url);
+                    var url = "https://res.cloudinary.com/kuramakyubi/image/upload/c_fill,h_315,w_510/v1593177061/" + result.info.public_id + "." + result.info.format;
+                    $("#preview").attr("src", url);
+                    $("input[name ='Image']").val(url);
                 }
             }
         );

@@ -101,6 +101,7 @@ namespace CourseP3.Areas.Admin.Controllers
         // GET: Admin/Courses/Create
         public ActionResult Create()
         {
+            ViewBag.SemesterId = new SelectList(db.Semesters, "Id", "Name");
             return View();
         }
 
@@ -109,7 +110,7 @@ namespace CourseP3.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Title,Time,Description,Image,Price,Status")] Course course)
+        public ActionResult Create([Bind(Include = "Id,Name,Title,Time,Description,Image,Price,Status,SemesterId")] Course course)
         {
             if (ModelState.IsValid)
             {
@@ -121,6 +122,7 @@ namespace CourseP3.Areas.Admin.Controllers
                     Description = course.Description,
                     Image = course.Image,
                     Price = course.Price,
+                    SemesterId = course.SemesterId,
                     Status = 1,
                 };
                 db.Courses.Add(courses);
@@ -143,6 +145,7 @@ namespace CourseP3.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.SemesterId = new SelectList(db.Semesters, "Id", "Name", course.SemesterId);
             return View(course);
         }
 
@@ -151,7 +154,7 @@ namespace CourseP3.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Title,Time,Description,Image,Price,Status")] Course course)
+        public ActionResult Edit([Bind(Include = "Id,Name,Title,Time,Description,Image,Price,Status,SemesterId")] Course course)
         {
             if (ModelState.IsValid)
             {
