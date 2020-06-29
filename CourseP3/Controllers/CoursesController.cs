@@ -62,6 +62,7 @@ namespace CourseP3.Controllers
             ViewBag.psize = pagesize;
             return View(course.ToList().ToPagedList(pageNumber, pagesize));
         }
+        [Authorize]
         public ActionResult Add(int id)
         {
             string curentuserid = User.Identity.GetUserId();

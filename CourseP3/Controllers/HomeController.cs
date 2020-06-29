@@ -53,6 +53,7 @@ namespace CourseP3.Controllers
         {
             return View();
         }
+        [Authorize]
         public ActionResult Add(int id)
         {
 
