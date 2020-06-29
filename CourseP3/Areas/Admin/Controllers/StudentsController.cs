@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace CourseP3.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class StudentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
