@@ -238,7 +238,9 @@ namespace CourseP3.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+
+                TempData["mess"] = "Change password success";
+                return RedirectToAction("Student", "Home");
             }
             AddErrors(result);
             return View(model);

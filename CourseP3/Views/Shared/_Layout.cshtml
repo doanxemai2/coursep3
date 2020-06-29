@@ -234,7 +234,13 @@
                 alert(@Html.Raw(Json.Encode(TempData["err"])));
         </script>
     }
+@if (TempData["mess"] != null)
+{
+    <script type="text/javascript">
 
+        alert(@Html.Raw(Json.Encode(TempData["mess"])));
+    </script>
+}
     <script>
         $(document).on('click', '.panel-heading span.clickable', function (e) {
             var $this = $(this);
