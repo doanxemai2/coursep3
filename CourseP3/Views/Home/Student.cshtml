@@ -55,7 +55,7 @@
                     </h5>
                     
                     <p class="proile-rating">RANKINGS : <span>8/10</span></p>
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist" style="width:114%">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
                         </li>
@@ -72,8 +72,8 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <a @Url.Action("ChangePassword", "Manage")>Change password</a>
-                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                <button type="submit" class="profile-edit-btn" style="color:white; Background:forestgreen ;font-size:12px;height:35px" name="btnAddMore"><a  @Url.Action("ChangePassword", "Manage")>Edit Profile</a></button>
+
             </div>
         </div>
         <div class="row">
