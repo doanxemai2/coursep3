@@ -137,9 +137,7 @@
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="row">
-                            <div class="col-md-3">
-                                <label>Semester1</label>
-                            </div>
+
                             <div class="col-md-3">
                                 <label>Course</label>
                             </div>
@@ -149,23 +147,55 @@
                             <div class="col-md-3">
                                 <label>Point</label>
                             </div>
+                            <div class="col-md-3">
+                                <label>Status</label>
+                            </div>
                         </div>
                         <div class="row">
                             @foreach (var item in Model)
                             {
-                                <div class="col-md-3">
-                                    <label>Semester One</label>
-                                </div>
-
+                              
                                 <div class="col-md-3">
                                     <p>@item.Course.Name</p>
                                 </div>
-                                <div class="col-md-3">
-                                    <p>@item.Status</p>
-                                </div>
+                              
+                                if (item.Point <= 4 && item.Point > 0)
+                                {
+
+                                    <div class="col-md-3" style="color:red">Notpass</div>
+                                }
+                                if (item.Point > 4)
+                                {
+                                    <div class="col-md-3" style="color:forestgreen">Pass</div>
+                                }
                                 <div class="col-md-3">
                                     <p>@item.Point</p>
                                 </div>
+                                if (item.Status == 1)
+                                {
+                                    <div class="col-md-3">
+                                        Completed
+                                    </div>
+                                }
+                                if (item.Status == 0)
+                                {
+                                    <div class="col-md-3">
+                                        Learning
+                                    </div>
+                                }
+                                if (item.Status == -1)
+                                {
+                                    <div class="col-md-3">
+                                        Delete
+                                    </div>
+                                }
+                                if (item.Status == 2)
+                                {
+                                    <div class="col-md-3">
+                                        Active
+                                    </div>
+                                }
+
                             }
 
                         </div>
@@ -174,9 +204,6 @@
                     <div class="tab-pane fade" id="semester2" role="tabpanel" aria-labelledby="semester2-tab">
                         <div class="row">
                             <div class="col-md-3">
-                                <label>Semester2</label>
-                            </div>
-                            <div class="col-md-3">
                                 <label>Course</label>
                             </div>
                             <div class="col-md-3">
@@ -184,70 +211,125 @@
                             </div>
                             <div class="col-md-3">
                                 <label>Point</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Status</label>
                             </div>
                         </div>
                         <div class="row">
                             @foreach (var item in ViewBag.sm2)
                             {
-                                <div class="col-md-3">
-                                    <label>Semester Two</label>
-                                </div>
 
                                 <div class="col-md-3">
                                     <p>@item.Course.Name</p>
                                 </div>
-                                <div class="col-md-3">
-                                    <p>@item.Status</p>
-                                </div>
+
+                                if (item.Point <= 4 && item.Point > 0)
+                                {
+
+                                    <div class="col-md-3" style="color:red">Notpass</div>
+                                }
+                                if (item.Point > 4)
+                                {
+                                    <div class="col-md-3" style="color:forestgreen">Pass</div>
+                                }
                                 <div class="col-md-3">
                                     <p>@item.Point</p>
                                 </div>
+                                if (item.Status == 1)
+                                {
+                                    <div class="col-md-3">
+                                        Completed
+                                    </div>
+                                }
+                                if (item.Status == 0)
+                                {
+                                    <div class="col-md-3">
+                                        Learning
+                                    </div>
+                                }
+                                if (item.Status == -1)
+                                {
+                                    <div class="col-md-3">
+                                        Delete
+                                    </div>
+                                }
+                                if (item.Status == 2)
+                                {
+                                    <div class="col-md-3">
+                                        Active
+                                    </div>
+                                }
                             }
 
                         </div>
                         
                     </div><div class="tab-pane fade" id="semester3" role="tabpanel" aria-labelledby="semester3-tab">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label>Semester3</label>
-                            </div>
-                            <div class="col-md-3">
-                                <label>Course</label>
-                            </div>
-                            <div class="col-md-3">
-                                <label>CourseStatus</label>
-                            </div>
-                            <div class="col-md-3">
-                                <label>Point</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            @foreach (var item in ViewBag.sm3)
-                            {
-                                <div class="col-md-3">
-                                    <label>Semester Three</label>
-                                </div>
+                              <div class="row">
+                                  <div class="col-md-3">
+                                      <label>Course</label>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <label>CourseStatus</label>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <label>Point</label>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <label>Status</label>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  @foreach (var item in ViewBag.sm3)
+                                  {
+                                      <div class="col-md-3">
+                                          <p>@item.Course.Name</p>
+                                      </div>
 
-                                <div class="col-md-3">
-                                    <p>@item.Course.Name</p>
-                                </div>
-                                <div class="col-md-3">
-                                    <p>@item.Status</p>
-                                </div>
-                                <div class="col-md-3">
-                                    <p>@item.Point</p>
-                                </div>
-                            }
+                                      if (item.Point <= 4 && item.Point > 0)
+                                      {
 
-                        </div>
+                                          <div class="col-md-3" style="color:red">Notpass</div>
+                                      }
+                                      if (item.Point > 4)
+                                      {
+                                          <div class="col-md-3" style="color:forestgreen">Pass</div>
+                                      }
+                                      <div class="col-md-3">
+                                          <p>@item.Point</p>
+                                      </div>
+                                      if (item.Status == 1)
+                                      {
+                                          <div class="col-md-3">
+                                              Completed
+                                          </div>
+                                      }
+                                      if (item.Status == 0)
+                                      {
+                                          <div class="col-md-3">
+                                              Learning
+                                          </div>
+                                      }
+                                      if (item.Status == -1)
+                                      {
+                                          <div class="col-md-3">
+                                              Delete
+                                          </div>
+                                      }
+                                      if (item.Status == 2)
+                                      {
+                                          <div class="col-md-3">
+                                              Active
+                                          </div>
+                                      }
+                                  }
+
+                              </div>
                         
                     </div>
                     <div class="tab-pane fade" id="semester4" role="tabpanel" aria-labelledby="semester4-tab">
                         <div class="row">
                             <div class="col-md-3">
-                                <label>Semester4</label>
-                            </div>
-                            <div class="col-md-3">
                                 <label>Course</label>
                             </div>
                             <div class="col-md-3">
@@ -255,24 +337,54 @@
                             </div>
                             <div class="col-md-3">
                                 <label>Point</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Status</label>
                             </div>
                         </div>
                         <div class="row">
                             @foreach (var item in ViewBag.sm4)
                             {
                                 <div class="col-md-3">
-                                    <label>Semester Four</label>
-                                </div>
-
-                                <div class="col-md-3">
                                     <p>@item.Course.Name</p>
                                 </div>
-                                <div class="col-md-3">
-                                    <p>@item.Status</p>
-                                </div>
+
+                                if (item.Point <= 4 && item.Point > 0)
+                                {
+
+                                    <div class="col-md-3" style="color:red">Notpass</div>
+                                }
+                                if (item.Point > 4)
+                                {
+                                    <div class="col-md-3" style="color:forestgreen">Pass</div>
+                                }
                                 <div class="col-md-3">
                                     <p>@item.Point</p>
                                 </div>
+                                if (item.Status == 1)
+                                {
+                                    <div class="col-md-3">
+                                        Completed
+                                    </div>
+                                }
+                                if (item.Status == 0)
+                                {
+                                    <div class="col-md-3">
+                                        Learning
+                                    </div>
+                                }
+                                if (item.Status == -1)
+                                {
+                                    <div class="col-md-3">
+                                        Delete
+                                    </div>
+                                }
+                                if (item.Status == 2)
+                                {
+                                    <div class="col-md-3">
+                                        Active
+                                    </div>
+                                }
                             }
 
                         </div>
