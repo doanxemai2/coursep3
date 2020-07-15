@@ -83,7 +83,7 @@ namespace CourseP3.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(fAQ).State = EntityState.Modified;
+                db.Entry(fAQ).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
