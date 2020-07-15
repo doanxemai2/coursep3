@@ -9,13 +9,12 @@ namespace CourseP3.Models
     public class News
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "Please enter facility Title.")]
-        [Display(Name = "Title")]
-        [StringLength(50, MinimumLength = 2, ErrorMessage = "Title is only allowed between 2 - 50 characters.")]
+        //[Required(ErrorMessage = "Please enter facility Title.")]
+        //[Display(Name = "Title")]
         public string Title { get; set; }
         public string Description { get; set; }
-        [Required(ErrorMessage = "Please enter facility Thumbnail.")]
-        [Display(Name = "Title")]
+        //[Required(ErrorMessage = "Please enter facility Thumbnail.")]
+        //[Display(Name = "Title")]
         public string Thumbnail { get; set; }
         public int  Status { get; set; }
 

@@ -41,10 +41,14 @@
                                 <button class="au-btn-filter">
                                     <i class="zmdi zmdi-filter-list"></i>filters
                                 </button>
+                                <form action="/Admin/Courses/Index" method="get">
+                                    <span>Start Date :</span><input type="date" name="start" />
+                                    <span>End Date :</span><input type="date" name="end" />
+                                    <input type="submit" value="Submit" />
+                                </form>
                             </div>
                             <div class="table-data__tool-right">
                                 <button class="btn btn-primary">@Html.ActionLink("Create New", "Create", null, new { style = "color:white;text-decoration:none" })</button>
-
                             </div>
                         </div>
                         <div class="table-responsive table-responsive-data2">

@@ -11,7 +11,6 @@ namespace CourseP3.Areas.Admin.Models
         public int Id { get; set; }
         [Required(ErrorMessage = "Please enter facility Name.")]
         [Display(Name = "Name")]
-        [StringLength(50, MinimumLength = 2, ErrorMessage = "Name is only allowed between 2 - 50 characters.")]
         public string Name { get; set; }
         [Display(Name = "Phone")]
         public int Hotline { get; set; }
