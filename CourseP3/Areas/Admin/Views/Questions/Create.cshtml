@@ -23,48 +23,55 @@
 
                                 @Html.AntiForgeryToken()
 
-                        <div class="form-horizontal">
-                            <h4>Question</h4>
-                            <hr />
+                                <div class="form-horizontal">
+                                    <h4>Question</h4>
+                                    <hr />
 
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.CourseId, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.DropDownList("CourseId", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "text-danger", style = "  height: auto;" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.QuestionContent, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.QuestionContent, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.QuestionContent, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Point, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Point, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Point, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            @{
-                                for (int i = 0; i < 4; i++)
-                                {
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                     <div class="form-group">
-                                        <input id="check-@i" type="radio" name="Choice" value="" />
-                                        <input class="form-control" id="choice-@i" type="text" name="name" value="" />
+                                        @Html.LabelFor(model => model.CourseId, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.DropDownList("CourseId", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "text-danger", style = "  height: auto;" })
                                         </div>
-                                }
-                            }
-                            <div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <input id="create-question" type="button" value="Create" class="btn btn-default" />
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.QuestionContent, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.QuestionContent, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.QuestionContent, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Point, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Point, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Point, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    @{
+                                        for (int i = 0; i < 4; i++)
+                                        {
+                                            <div class="form-group">
+                                
+                                                <div class="col-md-2 control-label">
+                                                    <input class="" id="check-@i" type="radio" name="Choice" value="" />
+                                                </div>
+                                                <div class="col-md-10" >
+                                                    <input class="form-control" id="choice-@i" type="text" name="name" value="" />
+                                                </div>
+
+                                            </div>
+                                        }
+                                    }
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <input id="create-question" type="button" value="Create" class="btn btn-default" />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
                             }
                         </div>
 
@@ -122,17 +129,17 @@
             }
             console.log(question);
             $.ajax({
-                type: 'POST',  
-                url: '@Url.Action("Create", "Questions")',  
-                data: { question },  
-  
+                type: 'POST',
+                url: '@Url.Action("Create", "Questions")',
+                data: { question },
+
                 success: function (response) {
                     window.location.href = '@Url.Action("Index", "Questions")';
-                },  
-                error: function (response) {  
-  
-                }  
-            });  
+                },
+                error: function (response) {
+
+                }
+            });
         });
     </script>
 }

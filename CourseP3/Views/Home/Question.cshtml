@@ -17,22 +17,28 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div>
-                    <span id="m">Phút</span> :
-                    <span id="s">Giây</span>
-                </div>
+                <span class="border border-light" style="background-color:#c2224b">
+                    <span style="color:white">Time:</span>
+                    <span style="color:white" id="m">Phút</span> :
+                    <span style="color:white" id="s">Giây</span>
+                </span>
+ 
                 @foreach (var item in Model)
                 {
-                    <div class="row">
-                        <p>@item.QuestionContent (@item.Point)</p>
-                        <span id="courseId" style="display: none;">@item.CourseId</span>
-                        <span id="@string.Format("{0}{1}", "question-", count)" style="display: none;">@item.Id</span>
+                    <div>
+                        <div>
+                            <p style="color:black"><b>@(@count+1), @item.QuestionContent (@item.Point)</b></p>
+                            <span id="courseId" style="display: none;">@item.CourseId</span>
+                            <span id="@string.Format("{0}{1}", "question-", count)" style="display: none;">@item.Id</span>
+                        </div>                       
                         <div>
                             <ul>
                                 @foreach (var answer in item.Choices)
                                 {
+                                <div>
                                     <input type="radio" name='@string.Format("{0}{1}", "answer-", count)' value="@answer.ChoiceContent" />
                                     @answer.ChoiceContent
+                                </div>
                                 }
                             </ul>
                         </div>
@@ -42,7 +48,7 @@
             </div>
 
         </div>
-        <button type="button" id="submitQuiz">Submit</button>
+        <button class="btn btn-success" type="button" id="submitQuiz">Submit</button>
     </div>
 </div>
 
