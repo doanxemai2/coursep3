@@ -7,7 +7,7 @@ namespace CourseP3
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new CustomAuthorizeAttribute());
+            //filters.Add(new CustomAuthorizeAttribute());
             filters.Add(new HandleErrorAttribute());
         }
         public class CustomAuthorizeAttribute : AuthorizeAttribute

@@ -29,7 +29,7 @@ namespace CourseP3.Areas.Admin.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 courses = db.Courses.Where(x => x.Title.Contains(searchString))
-                    .Where(x => x.Status == 1 && x.CreatedAt >= start && x.CreatedAt <= end);
+                    .Where(x => x.Status == 1);
             }
 
             ViewBag.PageSize = new List<SelectListItem>()
