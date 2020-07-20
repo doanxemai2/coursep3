@@ -53,8 +53,6 @@
                     <h5>
                         <p>@ViewBag.CurrentUser.UserName</p>
                     </h5>
-                    
-                    <p class="proile-rating">RANKINGS : <span>8/10</span></p>
                     <ul class="nav nav-tabs" id="myTab" role="tablist" style="width:114%">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
@@ -144,55 +142,70 @@
                             <div class="col-md-3">
                                 <label>CourseStatus</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <label>Point</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <label>Status</label>
+                            </div>
+                            <div class="col-md-2">
+                                <label>Exercise</label>
                             </div>
                         </div>
                         <div class="row">
                             @foreach (var item in Model)
                             {
-                              
+
                                 <div class="col-md-3">
                                     <p>@item.Course.Name</p>
                                 </div>
-                              
+                                if (item.Point == 0)
+                                {
+                                    <div class="col-md-3" style="color:forestgreen">No point</div>
+                                    <div class="col-md-2">
+                                        <p></p>
+                                    </div>
+                                }
                                 if (item.Point <= 4 && item.Point > 0)
                                 {
 
                                     <div class="col-md-3" style="color:red">Notpass</div>
+                                    <div class="col-md-2">
+                                        <p>@item.Point</p>
+                                    </div>
                                 }
                                 if (item.Point > 4)
                                 {
                                     <div class="col-md-3" style="color:forestgreen">Pass</div>
+                                    <div class="col-md-2">
+                                        <p>@item.Point</p>
+                                    </div>
                                 }
-                                <div class="col-md-3">
-                                    <p>@item.Point</p>
-                                </div>
                                 if (item.Status == 1)
                                 {
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         Completed
                                     </div>
                                 }
                                 if (item.Status == 0)
                                 {
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         Learning
                                     </div>
-                                }
-                                if (item.Status == -1)
-                                {
-                                    <div class="col-md-3">
-                                        Delete
+                                    <div class="col-md-2">
+                                        <a href="@Url.Action("Question", new {courseId = item.CourseId})">Do exercises</a>
                                     </div>
                                 }
                                 if (item.Status == 2)
                                 {
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         Active
+                                    </div>
+                                }
+                                if (item.Status == 5)
+                                {
+                                    <div class="col-md-2">
+                                        Did exercise
                                     </div>
                                 }
 

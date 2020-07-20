@@ -1,0 +1,74 @@
+﻿@model IEnumerable<CourseP3.Models.Question>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+</table>
+<div class="page-container">
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- DATA TABLE -->
+                        <h1 class="title-5 m-b-35">Data Table Question</h1>
+                        <div class="table-data__tool">
+                            <div class="table-data__tool-left">
+                            </div>
+                            <div class="table-data__tool-right">
+                                <button class="btn btn-primary">@Html.ActionLink("Create New", "Create", null, new { style = "color:white;text-decoration:none" })</button>
+                            </div>
+                        </div>
+                        <div class="table-responsive table-responsive-data2">
+                            <table class="table table-data2">
+                                <thead>
+                                    <tr>
+                                        <th>Question</th>
+                                        <th>Answers</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr class="tr-shadow">
+                                            <td>@Html.DisplayFor(modelItem => item.QuestionContent)</td>
+                                            <td>
+                                                @foreach (var choice in item.Choices)
+                                                {
+                                                    <span>@choice.ChoiceContent |</span>
+                                                }
+                                            </td>
+                                            @*<td>
+                                                <div class="table-data-feature">
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-success">@Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { style = "color:white;text-decoration:none" })</button>
+                                                        <button class="btn btn-primary">@Html.ActionLink("Details", "Details", new { id = item.Id }, new { style = "color:white;text-decoration:none" })</button>
+                                                    </div>
+                                                </div>
+                                            </td>*@
+                                        </tr>
+                                    }
+                                    @*<tr class="spacer"></tr>*@
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- END DATA TABLE -->
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="copyright">
+                            <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

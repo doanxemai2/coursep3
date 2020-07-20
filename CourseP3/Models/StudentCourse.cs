@@ -15,6 +15,7 @@ namespace CourseP3.Models
         public string StudentId { get; set; }
         public int CourseId { get; set; }
         public int Point { get; set; }
+        public int PointEx { get; set; }
         public int Status { get; set; }
         public virtual Course Course { get; set; }
         public virtual ApplicationUser Student { get; set; }
@@ -39,8 +40,8 @@ namespace CourseP3.Models
         {
             Completed = 1,
             Learning = 0,
-            Active = 2
-
+            Active = 2,
+            Done = 5,
         }
     }
 }

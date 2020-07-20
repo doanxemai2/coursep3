@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -32,6 +33,7 @@ namespace CourseP3.Controllers
 
             return View();
         }
+        [Authorize(Roles = "Student")]
         public ActionResult Student()
         {
             string curentuserid = User.Identity.GetUserId();
@@ -176,6 +178,72 @@ namespace CourseP3.Controllers
             {
                 return View();
             }
+        }
+        [Authorize(Roles = "Student")]
+        public ActionResult Question(int CourseId)
+        {
+            var list = db.Question.Include(x => x.Choices).Where(x => x.CourseId == CourseId).ToList();
+            return View(list);
+        }
+        [HttpPost]
+        [Authorize(Roles = "Student")]
+        public ActionResult Test(List<Question> resultQuiz)
+        {
+            var id = User.Identity.GetUserId();
+            int totalPointTest = 0;
+            int totalPoint = 0;
+            int answer = 0;
+            int courseId = 0;
+            foreach (var item in resultQuiz)
+            {
+                var question = db.Question.Find(item.Id);
+                courseId = question.CourseId;
+                totalPointTest += question.Point;
+                if (item.AnswerContent != null)
+                {
+                    if (item.AnswerContent.Equals(question.AnswerContent))
+                    {
+                        totalPoint += question.Point;
+                        answer += 1;
+                    }
+                }
+            }
+
+            double result = (double)totalPoint / totalPointTest * 100;
+            int percent = (int) Math.Round(result, 0);
+            Session["pointEx"] = percent;
+            var studentCourse = db.StudentCourses.Where(x => x.StudentId == id).FirstOrDefault(x => x.CourseId == courseId);
+            if (studentCourse != null)
+            {
+                studentCourse.Status = (int) StudentCourse.StudentCourseStatus.Done;
+                db.Entry(studentCourse).State = EntityState.Modified;
+            }
+
+            db.SaveChanges();
+            return Json(new
+            {
+                point = percent,
+                answerRight = answer,
+                courseId = courseId
+            }, JsonRequestBehavior.AllowGet);
+        }
+        [Authorize(Roles = "Student")]
+        public ActionResult Result(int courseId, int answerRight)
+        {
+            var id = User.Identity.GetUserId();
+            ViewBag.Student = db.Users.Find(id);
+            ViewBag.Course = db.Courses.Find(courseId);
+            ViewBag.AnswerRight = answerRight;
+            int pointEx = (int) Session["pointEx"];
+            var studentCourse = db.StudentCourses.Where(x => x.StudentId == id).FirstOrDefault(x => x.CourseId == courseId);
+            if (studentCourse != null)
+            {
+                studentCourse.PointEx = pointEx;
+                db.Entry(studentCourse).State = EntityState.Modified;
+            }
+
+            db.SaveChanges();
+            return View();
         }
     }
 }

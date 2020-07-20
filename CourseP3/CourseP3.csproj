@@ -185,6 +185,7 @@
     <Compile Include="Areas\Admin\Controllers\StudentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\SemestersController.cs" />
+    <Compile Include="Areas\Admin\QuestionsController.cs" />
     <Compile Include="Areas\Client\ClientAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdmissionsController.cs" />
@@ -194,22 +195,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202007152020431_news.cs" />
-    <Compile Include="Migrations\202007152020431_news.Designer.cs">
-      <DependentUpon>202007152020431_news.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202007152025403_new.cs" />
-    <Compile Include="Migrations\202007152025403_new.Designer.cs">
-      <DependentUpon>202007152025403_new.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CenterDetail.cs" />
+    <Compile Include="Models\Choice.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\FAQ.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\News.cs" />
+    <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Semester.cs" />
     <Compile Include="Models\SQL.cs" />
     <Compile Include="Models\Student.cs" />
@@ -1020,6 +1015,9 @@
     <Content Include="Areas\Admin\Views\Semesters\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Semesters\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Semesters\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Question.cshtml" />
+    <Content Include="Areas\Admin\Views\Questions\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Questions\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\styles.js" />
     <Content Include="Scripts\ckeditor\vendor\promise.js" />
@@ -1094,6 +1092,8 @@
     <Content Include="Views\Home\News.cshtml" />
     <Content Include="Views\Home\NewsDetails.cshtml" />
     <Content Include="Views\Home\Student.cshtml" />
+    <Content Include="Views\Home\Question.cshtml" />
+    <Content Include="Views\Home\Result.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1116,14 +1116,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202007152020431_news.resx">
-      <DependentUpon>202007152020431_news.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202007152025403_new.resx">
-      <DependentUpon>202007152025403_new.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

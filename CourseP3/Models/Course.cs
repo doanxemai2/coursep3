@@ -30,6 +30,7 @@ namespace CourseP3.Areas.Admin.Models
         public int? SemesterId { get; set; }
         public virtual Semester Semester { get; set; }
         public virtual ICollection<StudentCourse> StudentCourses { get; set; }
+        public virtual ICollection<Question> Questions { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? CreatedAt { get; set; }

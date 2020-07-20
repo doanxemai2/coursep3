@@ -1,0 +1,131 @@
+﻿@model IEnumerable<CourseP3.Models.Question>
+@{
+    var count = 0;
+}
+<div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../../images/bg_1.jpg')">
+    <div class="container">
+        <div class="row align-items-end">
+            <div class="col-lg-7">
+                <h2 class="mb-0">Exercise</h2>
+                <p></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="site-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div>
+                    <span id="m">Phút</span> :
+                    <span id="s">Giây</span>
+                </div>
+                @foreach (var item in Model)
+                {
+                    <div class="row">
+                        <p>@item.QuestionContent (@item.Point)</p>
+                        <span id="courseId" style="display: none;">@item.CourseId</span>
+                        <span id="@string.Format("{0}{1}", "question-", count)" style="display: none;">@item.Id</span>
+                        <div>
+                            <ul>
+                                @foreach (var answer in item.Choices)
+                                {
+                                    <input type="radio" name='@string.Format("{0}{1}", "answer-", count)' value="@answer.ChoiceContent" />
+                                    @answer.ChoiceContent
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    count++;
+                }
+            </div>
+
+        </div>
+        <button type="button" id="submitQuiz">Submit</button>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        var m = 1;
+        var s = 0;
+        var timeout;
+        start();
+
+        function start() {
+            if (s === -1) {
+                m -= 1;
+                s = 59;
+            }
+            if (m === -1) {
+                clearTimeout(timeout);
+                submitTest();
+                return false;
+            }
+            document.getElementById('m').innerText = m.toString();
+            document.getElementById('s').innerText = s.toString();
+            if (s === 0) {
+                document.getElementById('s').innerText = "00";
+            }
+            timeout = setTimeout(function() {
+                    s--;
+                    start();
+                },
+                1000);
+            return true;
+        }
+
+        $('#submitQuiz').on('click',
+            function() {
+                clearTimeout(timeout);
+                submitTest();
+            });
+
+        function submitTest() {
+            var resultQuiz = [],
+                question = {};
+            for (var i = 0; i < @count; i++) {
+                question = {
+                    Id: $('#question-' + i).text(),
+                    CourseId: $('#courseId').text(),
+                    AnswerContent: $('input[name=answer-' + i + ']:checked').val()
+                }
+
+                resultQuiz.push(question);
+            }
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Test", "Home")',
+                data: { resultQuiz },
+
+                success: function(response) {
+                    @*$.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("Result", "Home")',
+                        data: {  point: response.point,
+                            answerRight: response.answerRight,
+                            courseId: response.courseId },
+
+                        success: function (response) {
+                            window.location.href = '@Url.Action("Result")';
+                        },
+                        error: function (response) {
+
+                        }
+                    });*@
+                    console.log(response.point);
+                    console.log(response.courseId);
+                    console.log(response.answerRight);
+                    window.location.href = `/Home/Result?courseId=${response.courseId}&answerRight=${response.answerRight}`;
+                },
+                error: function(response) {
+
+                }
+            });
+        }
+    </script>
+
+}
+

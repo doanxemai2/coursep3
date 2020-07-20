@@ -1,0 +1,107 @@
+﻿@model IEnumerable<CourseP3.Models.Question>
+@{
+    var count = 0;
+}
+<div class="page-container">
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div>
+                            <span id="m">Phút</span> :
+                            <span id="s">Giây</span>
+                        </div>
+                        @foreach (var item in Model)
+                        {
+                            <div class="row">
+                                <p>@item.QuestionContent (@item.Point)</p>
+                                <span id="@string.Format("{0}{1}", "question-", count)" style="display: none;">@item.Id</span>
+                                <div>
+                                    <ul>
+                                        @foreach (var answer in item.Choices)
+                                        {
+                                            <input type="radio" name='@string.Format("{0}{1}", "answer-", count)' value="@answer.ChoiceContent" />
+                                            @answer.ChoiceContent
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                            count++;
+                        }
+                    </div>
+
+                </div>
+                <button type="button" id="submitQuiz">Submit</button>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="copyright">
+                            <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        var m = 1;
+        var s = 0;
+        var timeout;
+        start();
+        function start() {
+            if (s === -1) {
+                m -= 1;
+                s = 59;
+            }
+            if (m === -1){
+                clearTimeout(timeout);
+                submitTest();
+                return false;
+            }
+            document.getElementById('m').innerText = m.toString();
+            document.getElementById('s').innerText = s.toString();
+            if (s === 0) {
+                document.getElementById('s').innerText = "00";
+            }
+            timeout = setTimeout(function() {
+                    s--;
+                    start();
+                },
+                1000);
+            return true;
+        }
+        $('#submitQuiz').on('click', function () {
+            //clearTimeout(timeout);
+            submitTest();
+        });
+        function submitTest() {
+            var resultQuiz = [],
+                question = {};
+            for (var i = 0; i < @count; i++) {
+                question = {
+                    Id: $('#question-' + i).text(),
+                    AnswerContent: $('input[name=answer-' + i + ']:checked').val()
+                }
+
+                resultQuiz.push(question);
+            }
+            $.ajax({
+                type: 'POST',  
+                url: '@Url.Action("Test", "Dashboard")',  
+                data: { resultQuiz },  
+  
+                success: function (response) {
+                    window.location.href = '/Admin?id=' + response.data;
+                },  
+                error: function (response) {  
+  
+                }  
+            });  
+        }
+    </script>
+
+}
