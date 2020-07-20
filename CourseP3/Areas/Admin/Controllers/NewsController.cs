@@ -136,7 +136,7 @@ namespace CourseP3.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(news).State = EntityState.Modified;
+                db.Entry(news).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

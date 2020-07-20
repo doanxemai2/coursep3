@@ -66,6 +66,7 @@ namespace CourseP3.Models
         public System.Data.Entity.DbSet<News> News { get; set; }
         public System.Data.Entity.DbSet<Semester> Semesters { get; set; }
         public System.Data.Entity.DbSet<StudentCourse> StudentCourses { get; set; }
+        public System.Data.Entity.DbSet<Question> Question { get; set; }
 
 
     }

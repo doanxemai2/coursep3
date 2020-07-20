@@ -9,7 +9,10 @@ namespace CourseP3.Areas.Admin.Models
     public class CenterDetail
     {
         public int Id { get; set; }
+        [Required(ErrorMessage = "Please enter facility Name.")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
+        [Display(Name = "Phone")]
         public int Hotline { get; set; }
         public string Description { get; set; }
         public CenterDetailStatus Status { get; set; }

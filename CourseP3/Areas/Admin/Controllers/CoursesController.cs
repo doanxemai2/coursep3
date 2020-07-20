@@ -17,14 +17,19 @@ namespace CourseP3.Areas.Admin.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Admin/Courses
-        public ActionResult Index(string sortOrder, string searchString, int? page, int? pageSize, string listcourse)
+        public ActionResult Index(string sortOrder, string searchString, int? page, int? pageSize, string listcourse,DateTime? start,DateTime? end)
         {
             var courses = db.Courses.Where(x => x.Status == 1);
 
+            if (start!= null && end !=null)
+            {
+                courses = db.Courses.Where(x => x.CreatedAt >= start && x.CreatedAt <= end);
+            }
+            
             if (!String.IsNullOrEmpty(searchString))
             {
                 courses = db.Courses.Where(x => x.Title.Contains(searchString))
-                    .Where(x => x.Status == 1);
+                    .Where(x => x.Status == 1 && x.CreatedAt >= start && x.CreatedAt <= end);
             }
 
             ViewBag.PageSize = new List<SelectListItem>()
@@ -158,7 +163,7 @@ namespace CourseP3.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(course).State = EntityState.Modified;
+                db.Entry(course).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

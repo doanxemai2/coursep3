@@ -1,0 +1,21 @@
+﻿@using Microsoft.AspNet.Identity
+<div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../../images/bg_1.jpg')">
+    <div class="container">
+        <div class="row align-items-end">
+            <div class="col-lg-7">
+                <h2 class="mb-0">Result</h2>
+                <p></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="site-section">
+    <div class="container">
+        <p>Student: @ViewBag.Student.Fullname</p>
+        <p>Course: @ViewBag.Course.Name</p>
+        <p>Number answer right: @ViewBag.AnswerRight</p>
+        <p>Point: @Session["pointEx"]%</p>
+
+    </div>
+
+</div>

@@ -9,7 +9,11 @@ namespace CourseP3.Areas.Admin.Models
     public class FAQ
     {
         public int Id { get; set; }
+        //[Required(ErrorMessage = "Please enter facility Question.")]
+        //[Display(Name = "Question")]
         public string Question { get; set; }
+        //[Required(ErrorMessage = "Please enter facility Answer.")]
+        //[Display(Name = "Answer")]
         public string Answer { get; set; }
         public FAQStatus Status { get; set; }
         public enum FAQStatus
