@@ -183,13 +183,21 @@ namespace CourseP3.Controllers
         public ActionResult Question(int CourseId)
         {
             var list = db.Question.Include(x => x.Choices).Where(x => x.CourseId == CourseId).ToList();
+            //var id = User.Identity.GetUserId();
+            //var studentCourse = db.StudentCourses.Where(x => x.StudentId == id).FirstOrDefault(x => x.CourseId == courseId);
+            //if (studentCourse != null)
+            //{
+            //    studentCourse.Status = (int)StudentCourse.StudentCourseStatus.Done;
+            //    db.Entry(studentCourse).State = EntityState.Modified;
+            //}
+            //db.SaveChanges();
             return View(list);
         }
         [HttpPost]
         [Authorize(Roles = "Student")]
         public ActionResult Test(List<Question> resultQuiz)
         {
-            var id = User.Identity.GetUserId();
+            
             int totalPointTest = 0;
             int totalPoint = 0;
             int answer = 0;
@@ -199,6 +207,7 @@ namespace CourseP3.Controllers
                 var question = db.Question.Find(item.Id);
                 courseId = question.CourseId;
                 totalPointTest += question.Point;
+
                 if (item.AnswerContent != null)
                 {
                     if (item.AnswerContent.Equals(question.AnswerContent))
@@ -211,15 +220,7 @@ namespace CourseP3.Controllers
 
             double result = (double)totalPoint / totalPointTest * 100;
             int percent = (int) Math.Round(result, 0);
-            Session["pointEx"] = percent;
-            var studentCourse = db.StudentCourses.Where(x => x.StudentId == id).FirstOrDefault(x => x.CourseId == courseId);
-            if (studentCourse != null)
-            {
-                studentCourse.Status = (int) StudentCourse.StudentCourseStatus.Done;
-                db.Entry(studentCourse).State = EntityState.Modified;
-            }
-
-            db.SaveChanges();
+            Session["pointEx"] = percent;           
             return Json(new
             {
                 point = percent,
