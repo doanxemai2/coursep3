@@ -179,27 +179,62 @@ namespace CourseP3.Migrations
             //    new Choice(){Id = 3, ChoiceContent = "C", IsRight = false},
             //    new Choice(){Id = 4, ChoiceContent = "D", IsRight = false},
             //};
-            //List<Question> listQuestions = new List<Question>()
-            //{
-            //    new Question(){QuestionContent = "Who are you?", CourseId = 2, Point = 1, AnswerContent = "A", Choices = new List<Choice>()
-            //    {
-            //        new Choice(){ChoiceContent = "A", IsRight = true},
-            //        new Choice(){ChoiceContent = "B", IsRight = false},
-            //        new Choice(){ChoiceContent = "C", IsRight = false},
-            //        new Choice(){ChoiceContent = "D", IsRight = false},
-            //    }},
-            //    new Question(){QuestionContent = "Who are I?", CourseId = 2, Point = 1, AnswerContent = "B", Choices = new List<Choice>()
-            //    {
-            //        new Choice(){ChoiceContent = "A", IsRight = false},
-            //        new Choice(){ChoiceContent = "B", IsRight = true},
-            //        new Choice(){ChoiceContent = "C", IsRight = false},
-            //        new Choice(){ChoiceContent = "D", IsRight = false},
-            //    }}
-            //};
-            //foreach (var question in listQuestions)
-            //{
-            //    context.Question.AddOrUpdate(question);
-            //}
+            List<Question> listQuestions = new List<Question>()
+            {
+                new Question(){QuestionContent = "What are the key features in the C programming language?", CourseId = 2, Point = 1, AnswerContent = "The possibility of a programmer to control the language", Choices = new List<Choice>()
+                {
+                    new Choice(){ChoiceContent = "Possibility to break down large programs into small modules", IsRight = false},
+                    new Choice(){ChoiceContent = "The possibility of a programmer to control the language", IsRight = true},
+                    new Choice(){ChoiceContent = "Possibility to add new features by the programmer", IsRight = false},
+                    new Choice(){ChoiceContent = "It is a platform-independent language", IsRight = false},
+                }},
+                new Question(){QuestionContent = "What are the modifiers available in C programming language?", CourseId = 2, Point = 1, AnswerContent = "Short", Choices = new List<Choice>()
+                {
+                    new Choice(){ChoiceContent = "Short", IsRight = true},
+                    new Choice(){ChoiceContent = "Long", IsRight = false},
+                    new Choice(){ChoiceContent = "Signed", IsRight = false},
+                    new Choice(){ChoiceContent = "Unsigned", IsRight = false},
+                }},
+                new Question(){QuestionContent = "Which of the following is not the keyword in C++?", CourseId = 2, Point = 2, AnswerContent = "friend", Choices = new List<Choice>()
+                {
+                    new Choice(){ChoiceContent = "volatile", IsRight = false},
+                    new Choice(){ChoiceContent = "friend", IsRight = true},
+                    new Choice(){ChoiceContent = "extends", IsRight = false},
+                    new Choice(){ChoiceContent = "this", IsRight = false},
+                }},
+                new Question(){QuestionContent = "C++ does not supports the following?", CourseId = 2, Point = 1, AnswerContent = "Hybrid inheritance", Choices = new List<Choice>()
+                {
+                    new Choice(){ChoiceContent = "Multilevel inheritance", IsRight = false},
+                    new Choice(){ChoiceContent = "Hybrid inheritance", IsRight = true},
+                    new Choice(){ChoiceContent = "None of the above", IsRight = false},
+                    new Choice(){ChoiceContent = "Hierarchical inheritance", IsRight = false},
+                }},
+                new Question(){QuestionContent = "Which feature of the OOPS gives the concept of reusability?", CourseId = 3, Point = 1, AnswerContent = "Inheritance", Choices = new List<Choice>()
+                {
+                    new Choice(){ChoiceContent = "Abstraction", IsRight = false},
+                    new Choice(){ChoiceContent = "Encapsulation", IsRight = false},
+                    new Choice(){ChoiceContent = "Inheritance", IsRight = true},
+                    new Choice(){ChoiceContent = "None of the above", IsRight = false},
+                }},
+                new Question(){QuestionContent = "The default executable generation on UNIX for a C++ program is ___", CourseId = 3, Point = 1, AnswerContent = "a.exe", Choices = new List<Choice>()
+                {
+                    new Choice(){ChoiceContent = "a.exe", IsRight = true},
+                    new Choice(){ChoiceContent = "a", IsRight = false},
+                    new Choice(){ChoiceContent = "a.out", IsRight = false},
+                    new Choice(){ChoiceContent = "out.a", IsRight = false},
+                }},
+                new Question(){QuestionContent = "What is the full form of STL?", CourseId = 3, Point = 2, AnswerContent = "Standard template library", Choices = new List<Choice>()
+                {
+                    new Choice(){ChoiceContent = "Standard template library", IsRight = true},
+                    new Choice(){ChoiceContent = "System template library", IsRight = false},
+                    new Choice(){ChoiceContent = "Standard topics library", IsRight = false},
+                    new Choice(){ChoiceContent = "None of the above", IsRight = false},
+                }},
+            };
+            foreach (var question in listQuestions)
+            {
+                context.Question.AddOrUpdate(question);
+            }
         }
     }
 }
