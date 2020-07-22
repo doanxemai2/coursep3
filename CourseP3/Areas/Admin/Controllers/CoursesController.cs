@@ -23,6 +23,8 @@ namespace CourseP3.Areas.Admin.Controllers
 
             if (start!= null && end !=null)
             {
+                start = start.Value.Add(new TimeSpan(00,00,00));
+                end = end.Value.Add(new TimeSpan(23,59,59));
                 courses = db.Courses.Where(x => x.CreatedAt >= start && x.CreatedAt <= end);
             }
             
