@@ -14,7 +14,7 @@ namespace CourseP3.Areas.Admin
         // GET: Admin/Questions
         public ActionResult Index()
         {
-            var list = db.Question.Include(x => x.Choices).ToList();
+            var list = db.Question.Include(x => x.Choices).OrderByDescending(x=>x.Id).ToList();
             return View(list);
         }
         [HttpGet]
