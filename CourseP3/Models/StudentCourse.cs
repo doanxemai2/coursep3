@@ -42,6 +42,7 @@ namespace CourseP3.Models
             Learning = 0,
             Active = 2,
             Done = 5,
+            Deleted = -1,
         }
     }
 }
