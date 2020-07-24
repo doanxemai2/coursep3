@@ -64,15 +64,12 @@ namespace CourseP3.Controllers
             studentCourse.CourseId = id;
             studentCourse.StudentId = curentuserid;
 
-            studentCourse.Status = 1;
+            studentCourse.Status = (int)StudentCourse.StudentCourseStatus.Active;
             var sc = db.StudentCourses.Where(r => r.CourseId == id && r.StudentId == curentuserid).ToList();
             var Cs = db.Courses.Find(id);
             var idSm = Cs.SemesterId;
             var idSmUser = db.Users.Find(curentuserid).SemesterId;
             if (sc.Count == 0 && idSm.Equals(idSmUser))
-
-
-
             {
                 db.StudentCourses.Add(studentCourse);
                 db.SaveChanges();
@@ -180,17 +177,17 @@ namespace CourseP3.Controllers
             }
         }
         [Authorize(Roles = "Student")]
-        public ActionResult Question(int CourseId)
+        public ActionResult Question(int courseId)
         {
-            var list = db.Question.Include(x => x.Choices).Where(x => x.CourseId == CourseId).ToList();
-            //var id = User.Identity.GetUserId();
-            //var studentCourse = db.StudentCourses.Where(x => x.StudentId == id).FirstOrDefault(x => x.CourseId == courseId);
-            //if (studentCourse != null)
-            //{
-            //    studentCourse.Status = (int)StudentCourse.StudentCourseStatus.Done;
-            //    db.Entry(studentCourse).State = EntityState.Modified;
-            //}
-            //db.SaveChanges();
+            var list = db.Question.Include(x => x.Choices).Where(x => x.CourseId == courseId).ToList();
+            var id = User.Identity.GetUserId();
+            var studentCourse = db.StudentCourses.Where(x => x.StudentId == id).FirstOrDefault(x => x.CourseId == courseId);
+            if (studentCourse != null)
+            {
+                studentCourse.Status = (int)StudentCourse.StudentCourseStatus.Done;
+                db.Entry(studentCourse).State = EntityState.Modified;
+            }
+            db.SaveChanges();
             return View(list);
         }
         [HttpPost]
