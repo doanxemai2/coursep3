@@ -37,10 +37,10 @@ namespace CourseP3.Controllers
         public ActionResult Student()
         {
             string curentuserid = User.Identity.GetUserId();
-            var Sc = db.StudentCourses.Where(r => r.StudentId == curentuserid && r.Course.SemesterId == 1).ToList();
-            var sm2 = db.StudentCourses.Where(r => r.StudentId == curentuserid && r.Course.SemesterId == 2).ToList();
-            var sm3 = db.StudentCourses.Where(r => r.StudentId == curentuserid && r.Course.SemesterId == 3).ToList();
-            var sm4 = db.StudentCourses.Where(r => r.StudentId == curentuserid && r.Course.SemesterId == 4).ToList();
+            var Sc = db.StudentCourses.Where(r => r.StudentId == curentuserid && r.Course.SemesterId == 1).Where(x => x.Status != (int)StudentCourse.StudentCourseStatus.Deleted && x.Status != (int)StudentCourse.StudentCourseStatus.Active).ToList();
+            var sm2 = db.StudentCourses.Where(r => r.StudentId == curentuserid && r.Course.SemesterId == 2).Where(x => x.Status != (int)StudentCourse.StudentCourseStatus.Deleted && x.Status != (int)StudentCourse.StudentCourseStatus.Active).ToList();
+            var sm3 = db.StudentCourses.Where(r => r.StudentId == curentuserid && r.Course.SemesterId == 3).Where(x => x.Status != (int)StudentCourse.StudentCourseStatus.Deleted && x.Status != (int)StudentCourse.StudentCourseStatus.Active).ToList();
+            var sm4 = db.StudentCourses.Where(r => r.StudentId == curentuserid && r.Course.SemesterId == 4).Where(x => x.Status != (int)StudentCourse.StudentCourseStatus.Deleted && x.Status != (int)StudentCourse.StudentCourseStatus.Active).ToList();
             ApplicationUser st = db.Users.FirstOrDefault(x => x.Id == curentuserid);
             Semester semester = db.Semesters.FirstOrDefault(r => r.Id == st.SemesterId);
             ViewBag.stNamee = st.UserName;
@@ -77,7 +77,7 @@ namespace CourseP3.Controllers
             }
             else
             {
-                TempData["err"] = "You have already signed up for the course or Your course is incorrect!!!";
+                TempData["err"] = "Your course is incorrect with your semester or your course is enrolled!!!";
             }
 
             //return RedirectToAction("Index", "Home");
